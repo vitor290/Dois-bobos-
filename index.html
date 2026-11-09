@@ -3,7 +3,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dois Bobos ❤️</title>
 <style>
 *{box-sizing:border-box}
@@ -16,18 +16,129 @@ font-family:Arial,sans-serif;
 text-align:center;
 }
 body.travado{overflow:hidden}
+button{font-family:inherit;cursor:pointer}
 
-/* ABERTURA */
-#intro{
+/* CAPA COM FOTO DA BILLIE */
+#capa{
 position:fixed;
 inset:0;
-z-index:99999;
-background:#050006;
+z-index:100001;
+background:
+linear-gradient(
+rgba(5,10,25,.18),
+rgba(5,10,25,.35)
+),
+url("fcf3bf12b84d9f7d6393a8ce6f7948ad.jpg")
+center center/cover no-repeat;
 display:flex;
 align-items:center;
 justify-content:center;
+padding:20px;
+overflow-y:auto;
+transition:opacity .65s ease;
+}
+#capa.sumir{
+opacity:0;
+pointer-events:none;
+}
+#painelSenha{
+width:100%;
+max-width:345px;
+padding:30px 20px;
+background:rgba(244,247,255,.88);
+border:2px solid #26385f;
+border-radius:25px;
+box-shadow:0 15px 50px #0008;
+backdrop-filter:blur(7px);
+color:#152b59;
+}
+#tituloSenha{
+font-size:32px;
+font-weight:900;
+margin:0 0 12px;
+color:#132752;
+}
+#subtituloSenha{
+font-size:14px;
+color:#233b67;
+line-height:1.6;
+}
+#visor{
+display:flex;
+justify-content:center;
+gap:8px;
+margin:25px auto 10px;
+}
+.digito{
+width:54px;
+height:60px;
+background:#ffffff;
+border:2px solid #172b5b;
+border-radius:11px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:29px;
+font-weight:700;
+color:#152b59;
+}
+.digito.ativo{
+border-color:#e17d9e;
+box-shadow:0 0 10px #e17d9e77;
+}
+#dica{
+font-size:12px;
+color:#24375e;
+margin:10px 0 18px;
+}
+#erro{
+font-size:12px;
+color:#a52c46;
+min-height:18px;
+}
+#teclado{
+background:#fff;
+border:3px solid #172b59;
+border-radius:24px;
+padding:12px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+max-width:245px;
+margin:12px auto 0;
+}
+.tecla{
+height:56px;
+background:#df7f9a;
+color:#142952;
+border:2px solid #9f405d;
+border-radius:12px;
+font-size:23px;
+font-weight:bold;
+box-shadow:0 3px 0 #92334c;
+}
+.tecla:active{
+transform:translateY(3px);
+box-shadow:none;
+}
+.tecla.apagar{font-size:17px}
+#rodapeSenha{
+font-size:12px;
+color:#344a70;
+margin:23px 0 0;
+}
+
+/* CHUVA DE CORAÇÕES */
+#intro{
+display:none;
+position:fixed;
+inset:0;
+z-index:100000;
+background:#050006;
+align-items:center;
+justify-content:center;
 overflow:hidden;
-transition:opacity .9s ease;
+transition:opacity .9s;
 }
 #intro.sumir{
 opacity:0;
@@ -38,7 +149,6 @@ position:absolute;
 inset:0;
 width:100%;
 height:100%;
-display:block;
 }
 #numero{
 position:relative;
@@ -51,7 +161,6 @@ text-shadow:
 0 0 30px #e81c7c,
 0 0 55px #9d004c;
 opacity:0;
-line-height:1;
 }
 #numero.mostrar{
 animation:entradaNumero .8s ease forwards;
@@ -125,14 +234,14 @@ height:190px;
 object-fit:cover;
 border-radius:12px;
 }
-button{
+.botao{
 background:#ff416b;
 color:white;
 border:0;
 border-radius:30px;
 padding:15px 23px;
 font-size:16px;
-cursor:pointer;
+margin:10px;
 }
 footer{
 padding:35px;
@@ -140,10 +249,46 @@ color:#ffb0c1;
 }
 </style>
 </head>
-
 <body class="travado">
 
-<!-- INTRO -->
+<!-- SENHA -->
+<div id="capa">
+<div id="painelSenha">
+<h2 id="tituloSenha">Digite a senha</h2>
+<p id="subtituloSenha">
+Uma surpresa especial para você, Samuel. ♡
+</p>
+
+<div id="visor">
+<div class="digito"></div>
+<div class="digito"></div>
+<div class="digito"></div>
+<div class="digito"></div>
+</div>
+
+<p id="dica">Dica: a senha é 0807 ♡</p>
+<div id="erro"></div>
+
+<div id="teclado">
+<button class="tecla" data-n="1">1</button>
+<button class="tecla" data-n="2">2</button>
+<button class="tecla" data-n="3">3</button>
+<button class="tecla" data-n="4">4</button>
+<button class="tecla" data-n="5">5</button>
+<button class="tecla" data-n="6">6</button>
+<button class="tecla" data-n="7">7</button>
+<button class="tecla" data-n="8">8</button>
+<button class="tecla" data-n="9">9</button>
+<div></div>
+<button class="tecla" data-n="0">0</button>
+<button class="tecla apagar" id="apagar">DEL</button>
+</div>
+
+<p id="rodapeSenha">♡ Feito especialmente para você ♡</p>
+</div>
+</div>
+
+<!-- CHUVA -->
 <div id="intro">
 <canvas id="chuva"></canvas>
 <div id="numero"></div>
@@ -163,8 +308,13 @@ Pular introdução
 <section>
 <h2>Nossa História 💌</h2>
 <div class="card">
-<p>Entre tantas pessoas no mundo, a vida colocou você na minha.</p>
-<p>E desde então, tudo ficou mais bonito.</p>
+<p>
+Entre tantas pessoas no mundo,
+a vida colocou você na minha.
+</p>
+<p>
+E desde então, tudo ficou mais bonito.
+</p>
 </div>
 </section>
 
@@ -188,7 +338,7 @@ Pular introdução
 <p id="mensagem">
 Clique no coração para receber uma mensagem.
 </p>
-<button onclick="surpresa()">
+<button class="botao" onclick="surpresa()">
 ❤️ Abrir cartinha
 </button>
 </div>
@@ -205,6 +355,67 @@ Clique no coração para receber uma mensagem.
 <footer>Feito com amor ❤️</footer>
 
 <script>
+/* SENHA */
+let senha="";
+let liberado=false;
+const digitos=document.querySelectorAll(".digito");
+const erro=document.getElementById("erro");
+const capa=document.getElementById("capa");
+
+function atualizarVisor(){
+digitos.forEach((d,i)=>{
+d.textContent=senha[i]||"";
+d.classList.toggle("ativo",i<senha.length);
+});
+}
+
+function digitar(n){
+if(liberado||senha.length>=4)return;
+senha+=n;
+erro.textContent="";
+atualizarVisor();
+
+if(senha.length===4){
+if(senha==="0807"){
+liberado=true;
+setTimeout(abrirSurpresa,450);
+}else{
+erro.textContent="Senha incorreta. Tente novamente.";
+setTimeout(()=>{
+senha="";
+atualizarVisor();
+},800);
+}
+}
+}
+
+function apagarDigito(){
+if(liberado)return;
+senha=senha.slice(0,-1);
+erro.textContent="";
+atualizarVisor();
+}
+
+document.querySelectorAll("[data-n]").forEach(b=>{
+b.addEventListener("click",()=>digitar(b.dataset.n));
+});
+document.getElementById("apagar")
+.addEventListener("click",apagarDigito);
+
+document.addEventListener("keydown",e=>{
+if(/^[0-9]$/.test(e.key))digitar(e.key);
+if(e.key==="Backspace")apagarDigito();
+});
+
+function abrirSurpresa(){
+document.getElementById("intro").style.display="flex";
+capa.classList.add("sumir");
+setTimeout(()=>{
+capa.remove();
+iniciarChuva();
+},650);
+}
+
 /* CARTINHAS */
 const frases=[
 "Você é uma das minhas partes favoritas da vida. ❤️",
@@ -212,7 +423,6 @@ const frases=[
 "Que a gente tenha muitas histórias para contar. 💌",
 "Você deixa meus dias mais bonitos. ❤️"
 ];
-
 function surpresa(){
 const n=Math.floor(Math.random()*frases.length);
 document.getElementById("mensagem").textContent=frases[n];
@@ -223,19 +433,11 @@ const canvas=document.getElementById("chuva");
 const ctx=canvas.getContext("2d");
 const intro=document.getElementById("intro");
 const numero=document.getElementById("numero");
-
-let largura=0;
-let altura=0;
+let largura=0,altura=0;
 let colunas=[];
-let ativo=true;
-let terminou=false;
-let ultimo=performance.now();
-const inicio=performance.now();
+let ativo=false,terminou=false;
+let ultimo=0,inicio=0;
 const tarefas=[];
-
-/* CONFIGURAÇÃO DA CHUVA */
-const espacoFrente=9;
-const espacoFundo=18;
 
 function ajustar(){
 const d=Math.min(devicePixelRatio||1,1.5);
@@ -244,37 +446,27 @@ altura=innerHeight;
 canvas.width=largura*d;
 canvas.height=altura*d;
 ctx.setTransform(d,0,0,d,0,0);
-
 colunas=[];
 
-/* CORAÇÕES PEQUENOS AO FUNDO */
-for(let x=0;x<largura;x+=espacoFundo){
+for(let x=0;x<largura;x+=18){
 colunas.push({
 x:x+Math.random()*5,
 y:Math.random()*altura*.65-altura*.4,
 vel:25+Math.random()*18,
 n:12+Math.floor(Math.random()*18),
-passo:10,
-tamanho:8,
-alpha:.3,
-fundo:true,
-ativar:Math.random(),
+passo:10,tamanho:8,alpha:.3,
+fundo:true,ativar:Math.random(),
 fase:Math.random()*10
 });
 }
-
-/* CORAÇÕES PRINCIPAIS */
-for(let x=0;x<largura;x+=espacoFrente){
+for(let x=0;x<largura;x+=9){
 colunas.push({
 x:x+Math.random()*3,
 y:Math.random()*altura*.75-altura*.35,
 vel:40+Math.random()*24,
 n:14+Math.floor(Math.random()*21),
-passo:10,
-tamanho:10,
-alpha:.85,
-fundo:false,
-ativar:Math.random(),
+passo:10,tamanho:10,alpha:.85,
+fundo:false,ativar:Math.random(),
 fase:Math.random()*10
 });
 }
@@ -283,118 +475,76 @@ fase:Math.random()*10
 function desenhar(tempo){
 if(!ativo)return;
 requestAnimationFrame(desenhar);
-
-/* LIMITA A CERCA DE 30 FPS */
 if(tempo-ultimo<33)return;
-
 const dt=Math.min((tempo-ultimo)/1000,.06);
 ultimo=tempo;
-
 const segundos=(tempo-inicio)/1000;
 
-/* FUNDO ESCURO */
 ctx.fillStyle="#050006";
 ctx.fillRect(0,0,largura,altura);
 
-/* AUMENTA A CHUVA AOS POUCOS */
-const intensidade=Math.min(
-1,.28+segundos*.48
-);
+const intensidade=Math.min(1,.28+segundos*.48);
+ctx.textAlign="center";
+ctx.textBaseline="middle";
 
 for(const c of colunas){
 if(c.ativar>intensidade)continue;
-
-/* QUEDA MAIS RÁPIDA */
 c.y+=c.vel*dt;
-
-/* REINICIA A COLUNA */
 if(c.y-c.n*c.passo>altura){
 c.y=-Math.random()*altura*.3;
 }
-
-ctx.textAlign="center";
-ctx.textBaseline="middle";
 ctx.font=c.tamanho+"px Arial";
 
-/* CAUDA DE CORAÇÕES */
 for(let i=0;i<c.n;i++){
 const y=c.y-i*c.passo;
 if(y<0||y>altura)continue;
+const brilho=Math.pow(1-i/c.n,1.25);
+const pulso=.85+.15*Math.sin(tempo*.002+c.fase+i*.2);
+ctx.globalAlpha=c.alpha*brilho*pulso;
 
-const brilho=Math.pow(
-1-i/c.n,1.25
-);
-
-const pulso=.85+
-.15*Math.sin(
-tempo*.002+c.fase+i*.2
-);
-
-ctx.globalAlpha=
-c.alpha*brilho*pulso;
-
-/* CORES E PROFUNDIDADE */
-if(c.fundo){
-ctx.fillStyle="#a83b78";
-}else if(i<2){
-ctx.fillStyle="#ffacd5";
-}else if(i<7){
-ctx.fillStyle="#ff5ea4";
-}else if(i<15){
-ctx.fillStyle="#ec2775";
-}else{
-ctx.fillStyle="#9d124f";
-}
+if(c.fundo)ctx.fillStyle="#a83b78";
+else if(i<2)ctx.fillStyle="#ffacd5";
+else if(i<7)ctx.fillStyle="#ff5ea4";
+else if(i<15)ctx.fillStyle="#ec2775";
+else ctx.fillStyle="#9d124f";
 
 ctx.fillText("♥",c.x,y);
 }
 }
-
 ctx.globalAlpha=1;
 }
 
-/* CONTAGEM REGRESSIVA */
 function mostrarNumero(valor){
 if(terminou)return;
-
 numero.textContent=valor;
 numero.classList.remove("mostrar");
 void numero.offsetWidth;
 numero.classList.add("mostrar");
 }
 
-/* FINALIZAR INTRO */
 function finalizarIntro(){
 if(terminou)return;
 terminou=true;
 ativo=false;
-
 tarefas.forEach(clearTimeout);
 intro.classList.add("sumir");
 document.body.classList.remove("travado");
-
-setTimeout(()=>{
-intro.remove();
-},950);
+setTimeout(()=>intro.remove(),950);
 }
 
-/* AGENDAR ANIMAÇÕES */
-function agendar(fn,ms){
-tarefas.push(setTimeout(fn,ms));
-}
-
+function iniciarChuva(){
+inicio=performance.now();
+ultimo=inicio;
+ativo=true;
 ajustar();
 window.addEventListener("resize",ajustar);
 requestAnimationFrame(desenhar);
-
-/* CONTAGEM MAIS CEDO */
-agendar(()=>mostrarNumero("3"),2700);
-agendar(()=>mostrarNumero("2"),3900);
-agendar(()=>mostrarNumero("1"),5100);
-agendar(()=>mostrarNumero("♥"),6300);
-
-/* ENTRADA DO SITE */
-agendar(finalizarIntro,7700);
+tarefas.push(setTimeout(()=>mostrarNumero("3"),2700));
+tarefas.push(setTimeout(()=>mostrarNumero("2"),3900));
+tarefas.push(setTimeout(()=>mostrarNumero("1"),5100));
+tarefas.push(setTimeout(()=>mostrarNumero("♥"),6300));
+tarefas.push(setTimeout(finalizarIntro,7700));
+}
 </script>
 </body>
 </html>
