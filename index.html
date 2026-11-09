@@ -7,209 +7,354 @@
 <title>Dois Bobos ❤️</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#250008;color:#fff;font-family:Arial,sans-serif;text-align:center}
-header{padding:85px 20px;background:linear-gradient(145deg,#560017,#b30934)}
-h1{font-size:37px;margin:20px 0}
+html{scroll-behavior:smooth}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#250008;
+color:white;
+text-align:center;
+}
+body.introAtiva{overflow:hidden}
+
+/* CHUVA DE CORAÇÕES */
+#abertura{
+position:fixed;
+inset:0;
+z-index:99999;
+background:#050006;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+transition:opacity .9s ease;
+}
+#abertura.saindo{
+opacity:0;
+pointer-events:none;
+}
+#telaChuva{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+}
+#contador{
+position:relative;
+z-index:2;
+font-size:clamp(95px,29vw,160px);
+font-weight:900;
+color:#ff85bc;
+text-shadow:
+0 0 15px #ff3e91,
+0 0 35px #dc0059,
+0 0 65px #8b003a;
+opacity:0;
+}
+#contador.visivel{opacity:1}
+#contador.pulso{
+animation:numeroEntrando .8s ease;
+}
+@keyframes numeroEntrando{
+0%{transform:scale(.4);opacity:0}
+45%{transform:scale(1.2);opacity:1}
+100%{transform:scale(1);opacity:1}
+}
+#pular{
+position:absolute;
+bottom:35px;
+right:20px;
+z-index:4;
+background:transparent;
+border:1px solid #8b375c;
+padding:11px 16px;
+font-size:13px;
+color:#ffb1d1;
+border-radius:25px;
+}
+
+/* SITE ROMÂNTICO */
+header{
+min-height:75vh;
+padding:75px 20px;
+background:linear-gradient(145deg,#560017,#b30934);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+h1{
+font-size:clamp(30px,9vw,44px);
+margin:20px 0;
+}
 h2{color:#ff8fa5}
 p{line-height:1.7}
-.coracao{font-size:65px;animation:pulsar 1.5s infinite}
-@keyframes pulsar{50%{transform:scale(1.15)}}
-section{padding:35px 20px}
-.card{background:#480b1c;border:1px solid #8f3048;border-radius:20px;padding:24px;margin:18px auto;max-width:450px}
-.fotos{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:450px;margin:auto}
-.foto{background:#68162b;border-radius:15px;padding:50px 8px;color:#ffb9c8}
-button{background:#ff416b;color:white;border:0;border-radius:30px;padding:16px 25px;font-size:16px;margin:10px;cursor:pointer}
-footer{padding:30px;color:#ffb0c1}
+.coracao{
+font-size:75px;
+animation:pulsar 1.5s infinite;
+}
+@keyframes pulsar{
+50%{transform:scale(1.15)}
+}
+section{padding:38px 20px}
+.card{
+background:#480b1c;
+border:1px solid #8f3048;
+border-radius:20px;
+padding:25px;
+margin:18px auto;
+max-width:450px;
+}
+.fotos{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+max-width:450px;
+margin:auto;
+}
+.foto{
+background:#68162b;
+border-radius:15px;
+padding:45px 10px;
+min-height:190px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+color:#ffc5d3;
+}
+button{
+background:#ff416b;
+color:white;
+border:0;
+border-radius:30px;
+padding:16px 25px;
+font-size:16px;
+margin:10px;
+cursor:pointer;
+}
+footer{
+padding:35px;
+color:#ffb0c1;
+}
 </style>
 </head>
-<body>
+
+<body class="introAtiva">
+
+<!-- ABERTURA -->
+<div id="abertura">
+<canvas id="telaChuva"></canvas>
+<div id="contador"></div>
+<button id="pular" onclick="finalizarAbertura()">
+Pular introdução
+</button>
+</div>
+
+<!-- SITE -->
 <header>
 <div class="coracao">❤️</div>
 <h1>João Vitor & Samuel</h1>
 <p>Dois bobos, uma história só.</p>
 <p>Nosso cantinho especial ❤️</p>
 </header>
+
 <section>
 <h2>Nossa História 💌</h2>
 <div class="card">
-<p>Entre tantas pessoas no mundo, a vida colocou você na minha.</p>
-<p>E desde então, tudo ficou mais bonito.</p>
+<p>
+Entre tantas pessoas no mundo,
+a vida colocou você na minha.
+</p>
+<p>
+E desde então, tudo ficou mais bonito.
+</p>
 </div>
 </section>
+
 <section>
 <h2>Nossas Memórias 📸</h2>
 <div class="fotos">
-<div class="foto">❤️<p>Nossa foto 1</p></div>
-<div class="foto">❤️<p>Nossa foto 2</p></div>
+<div class="foto">
+❤️
+<p>Nossa foto 1</p>
+</div>
+<div class="foto">
+❤️
+<p>Nossa foto 2</p>
+</div>
 </div>
 </section>
+
 <section>
 <h2>Uma mensagem para você 💕</h2>
 <div class="card">
-<p id="mensagem">Clique no coração para receber uma mensagem.</p>
-<button onclick="surpresa()">❤️ Abrir cartinha</button>
+<p id="mensagem">
+Clique no coração para receber uma mensagem.
+</p>
+<button onclick="surpresa()">
+❤️ Abrir cartinha
+</button>
 </div>
 </section>
+
 <section>
 <h2>Nossas Músicas 🎵</h2>
 <div class="card">
-<p>Uma música, uma lembrança e nós dois.</p>
-<p>Em breve, nossas músicas favoritas estarão aqui.</p>
+<p>
+Uma música, uma lembrança e nós dois.
+</p>
+<p>
+Em breve, nossas músicas favoritas estarão aqui.
+</p>
 </div>
 </section>
-<footer>Feito com amor ❤️</footer>
+
+<footer>
+Feito com amor ❤️
+</footer>
+
 <script>
+/* FRASES */
 const frases=[
 "Você é uma das minhas partes favoritas da vida. ❤️",
 "Se eu pudesse escolher de novo, escolheria você. 💕",
 "Que a gente tenha muitas histórias para contar. 💌",
 "Você deixa meus dias mais bonitos. ❤️"
 ];
+
 function surpresa(){
 const n=Math.floor(Math.random()*frases.length);
 document.getElementById("mensagem").textContent=frases[n];
 }
+
+/* CHUVA DIGITAL DE CORAÇÕES */
+const canvas=document.getElementById("telaChuva");
+const ctx=canvas.getContext("2d");
+const abertura=document.getElementById("abertura");
+const contador=document.getElementById("contador");
+
+let largura=0;
+let altura=0;
+let colunas=[];
+let rodando=true;
+let terminou=false;
+let inicio=performance.now();
+let ultimo=0;
+
+function ajustarTela(){
+const d=Math.min(window.devicePixelRatio||1,2);
+largura=window.innerWidth;
+altura=window.innerHeight;
+
+canvas.width=largura*d;
+canvas.height=altura*d;
+ctx.setTransform(d,0,0,d,0,0);
+
+colunas=[];
+const espacamento=9;
+const total=Math.ceil(largura/espacamento);
+
+for(let i=0;i<total;i++){
+colunas.push({
+x:i*espacamento+4,
+y:Math.random()*altura*.35-Math.random()*altura*.3,
+velocidade:.8+Math.random()*1.5,
+comprimento:14+Math.floor(Math.random()*32),
+fase:Math.random()*10
+});
+}
+}
+
+function desenhar(tempo){
+if(!rodando)return;
+
+requestAnimationFrame(desenhar);
+
+if(tempo-ultimo<30)return;
+
+const passo=Math.min((tempo-ultimo)/16.7||1,3);
+ultimo=tempo;
+
+const decorrido=tempo-inicio;
+const intensidade=Math.min(decorrido/6200,1);
+
+ctx.fillStyle="#050006";
+ctx.fillRect(0,0,largura,altura);
+
+ctx.textAlign="center";
+ctx.textBaseline="middle";
+ctx.font="9px Arial";
+
+for(const c of colunas){
+c.y+=c.velocidade*(.8+intensidade*3)*passo;
+
+const tamanho=Math.round(
+c.comprimento*(.5+intensidade*.8)
+);
+
+if(c.y-tamanho*9>altura){
+c.y=-Math.random()*250;
+}
+
+for(let j=0;j<tamanho;j++){
+const y=c.y-j*9;
+if(y<0||y>altura)continue;
+
+const brilho=Math.max(.06,1-j/tamanho);
+const pulso=.8+.2*Math.sin(tempo*.003+c.fase);
+ctx.globalAlpha=brilho*pulso;
+
+if(j<2){
+ctx.fillStyle="#ffb0d3";
+}else if(j<7){
+ctx.fillStyle="#ff559b";
+}else if(j<17){
+ctx.fillStyle="#f02071";
+}else{
+ctx.fillStyle="#97003d";
+}
+
+ctx.fillText("♥",c.x,y);
+}
+}
+
+ctx.globalAlpha=1;
+}
+
+function mostrarNumero(n){
+if(terminou)return;
+contador.textContent=n;
+contador.classList.add("visivel");
+contador.classList.remove("pulso");
+void contador.offsetWidth;
+contador.classList.add("pulso");
+}
+
+function finalizarAbertura(){
+if(terminou)return;
+terminou=true;
+rodando=false;
+abertura.classList.add("saindo");
+document.body.classList.remove("introAtiva");
+
+setTimeout(()=>{
+abertura.remove();
+},950);
+}
+
+ajustarTela();
+window.addEventListener("resize",ajustarTela);
+requestAnimationFrame(desenhar);
+
+/* CONTAGEM REGRESSIVA */
+setTimeout(()=>mostrarNumero("3"),1900);
+setTimeout(()=>mostrarNumero("2"),3100);
+setTimeout(()=>mostrarNumero("1"),4300);
+setTimeout(()=>mostrarNumero("❤️"),5500);
+setTimeout(finalizarAbertura,6900);
 </script>
 
-<style>
-#introRoblox{
-position:fixed;inset:0;z-index:9999;
-background:#16051d;color:white;
-display:flex;align-items:center;
-justify-content:center;flex-direction:column;
-transition:opacity .7s;overflow:hidden
-}
-#introRoblox.fim{opacity:0;pointer-events:none}
-.cena{
-position:relative;width:95vw;max-width:420px;
-height:390px;overflow:hidden;border-radius:20px;
-background:linear-gradient(#514363,#211629)
-}
-.tituloCena{
-position:absolute;top:15px;width:100%;
-text-align:center;font-size:19px;color:white
-}
-.chao{
-position:absolute;bottom:0;width:100%;
-height:52px;background:#403144
-}
-.pc{
-position:absolute;left:12px;bottom:85px;
-font-size:68px;z-index:2
-}
-.avatar{
-position:absolute;bottom:45px;width:118px;
-height:190px;object-fit:cover;
-object-position:center;border-radius:12px;
-border:2px solid #cab5cf;z-index:3
-}
-#joaoR{left:53px}
-#samuelR{right:-140px}
-.marreta{
-position:absolute;right:77px;bottom:170px;
-font-size:58px;opacity:0;z-index:4;
-transform-origin:20% 90%
-}
-.pow{
-position:absolute;top:100px;width:100%;
-font-size:46px;font-weight:bold;color:#ffeb58;
-opacity:0;z-index:5
-}
-.flashR{
-position:absolute;inset:0;background:white;
-opacity:0;pointer-events:none;z-index:6
-}
-#introRoblox.rodando #samuelR{
-animation:chegar 1.3s .4s forwards
-}
-#introRoblox.rodando .marreta{
-animation:bater 1.2s 1.7s forwards
-}
-#introRoblox.rodando .cena{
-animation:tremer .4s 2.7s
-}
-#introRoblox.rodando .pow{
-animation:mostrar .7s 2.7s forwards
-}
-#introRoblox.rodando .flashR{
-animation:piscar .5s 2.7s
-}
-@keyframes chegar{
-to{right:25px}
-}
-@keyframes bater{
-0%{opacity:1;transform:rotate(-20deg)}
-55%{opacity:1;transform:rotate(-80deg)}
-100%{opacity:1;transform:rotate(50deg)}
-}
-@keyframes tremer{
-25%{transform:translateX(-12px)}
-50%{transform:translateX(12px)}
-75%{transform:translateX(-8px)}
-}
-@keyframes mostrar{
-30%,100%{opacity:1}
-}
-@keyframes piscar{
-30%{opacity:.9}
-100%{opacity:0}
-}
-#iniciarR{
-padding:17px 25px;background:#ff416b;
-border:0;border-radius:30px;
-color:white;font-size:18px;margin-top:25px
-}
-</style>
-
-<div id="introRoblox">
-<div class="cena">
-<div class="tituloCena">Uma surpresa para Samuel ❤️</div>
-<div class="chao"></div>
-<div class="pc">🖥️</div>
-<img id="joaoR" class="avatar"
-src="IMG_20261109_174503.jpg" alt="João">
-<img id="samuelR" class="avatar"
-src="IMG_20261109_174526.jpg" alt="Samuel">
-<div class="marreta">🔨</div>
-<div class="pow">POW! 💥</div>
-<div class="flashR"></div>
-</div>
-<button id="iniciarR" onclick="iniciarIntro()">
-▶ Começar surpresa
-</button>
-</div>
-
-<script>
-function iniciarIntro(){
-const intro=document.getElementById("introRoblox");
-const botao=document.getElementById("iniciarR");
-if(intro.classList.contains("rodando"))return;
-botao.style.display="none";
-intro.classList.add("rodando");
-
-try{
-const Audio=window.AudioContext||window.webkitAudioContext;
-const ctx=new Audio();
-ctx.resume();
-const osc=ctx.createOscillator();
-const ganho=ctx.createGain();
-const t=ctx.currentTime+2.7;
-osc.type="triangle";
-osc.frequency.setValueAtTime(160,t);
-osc.frequency.exponentialRampToValueAtTime(45,t+.2);
-ganho.gain.setValueAtTime(.001,t);
-ganho.gain.exponentialRampToValueAtTime(.5,t+.01);
-ganho.gain.exponentialRampToValueAtTime(.001,t+.25);
-osc.connect(ganho);
-ganho.connect(ctx.destination);
-osc.start(t);
-osc.stop(t+.26);
-}catch(e){}
-
-setTimeout(()=>intro.classList.add("fim"),3700);
-setTimeout(()=>intro.remove(),4500);
-}
-</script>
-  
 </body>
 </html>
+
