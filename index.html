@@ -212,6 +212,7 @@ const frases=[
 "Que a gente tenha muitas histórias para contar. 💌",
 "Você deixa meus dias mais bonitos. ❤️"
 ];
+
 function surpresa(){
 const n=Math.floor(Math.random()*frases.length);
 document.getElementById("mensagem").textContent=frases[n];
@@ -251,7 +252,7 @@ for(let x=0;x<largura;x+=espacoFundo){
 colunas.push({
 x:x+Math.random()*5,
 y:Math.random()*altura*.65-altura*.4,
-vel:17+Math.random()*14,
+vel:25+Math.random()*18,
 n:12+Math.floor(Math.random()*18),
 passo:10,
 tamanho:8,
@@ -267,7 +268,7 @@ for(let x=0;x<largura;x+=espacoFrente){
 colunas.push({
 x:x+Math.random()*3,
 y:Math.random()*altura*.75-altura*.35,
-vel:28+Math.random()*20,
+vel:40+Math.random()*24,
 n:14+Math.floor(Math.random()*21),
 passo:10,
 tamanho:10,
@@ -291,12 +292,11 @@ ultimo=tempo;
 
 const segundos=(tempo-inicio)/1000;
 
-/* FUNDO ESCURO COMO A REFERÊNCIA */
+/* FUNDO ESCURO */
 ctx.fillStyle="#050006";
 ctx.fillRect(0,0,largura,altura);
 
-/* COMEÇA COM POUCOS CORAÇÕES
-E INTENSIFICA EM 1,7 SEGUNDO */
+/* AUMENTA A CHUVA AOS POUCOS */
 const intensidade=Math.min(
 1,.28+segundos*.48
 );
@@ -304,10 +304,10 @@ const intensidade=Math.min(
 for(const c of colunas){
 if(c.ativar>intensidade)continue;
 
+/* QUEDA MAIS RÁPIDA */
 c.y+=c.vel*dt;
 
-/* RECOMEÇA A COLUNA DEPOIS
-QUE ELA SAI DA TELA */
+/* REINICIA A COLUNA */
 if(c.y-c.n*c.passo>altura){
 c.y=-Math.random()*altura*.3;
 }
@@ -316,7 +316,7 @@ ctx.textAlign="center";
 ctx.textBaseline="middle";
 ctx.font=c.tamanho+"px Arial";
 
-/* DESENHA A CAUDA DE CORAÇÕES */
+/* CAUDA DE CORAÇÕES */
 for(let i=0;i<c.n;i++){
 const y=c.y-i*c.passo;
 if(y<0||y>altura)continue;
@@ -333,7 +333,7 @@ tempo*.002+c.fase+i*.2
 ctx.globalAlpha=
 c.alpha*brilho*pulso;
 
-/* PONTAS MAIS BRILHANTES */
+/* CORES E PROFUNDIDADE */
 if(c.fundo){
 ctx.fillStyle="#a83b78";
 }else if(i<2){
@@ -353,7 +353,7 @@ ctx.fillText("♥",c.x,y);
 ctx.globalAlpha=1;
 }
 
-/* CONTAGEM */
+/* CONTAGEM REGRESSIVA */
 function mostrarNumero(valor){
 if(terminou)return;
 
@@ -363,7 +363,7 @@ void numero.offsetWidth;
 numero.classList.add("mostrar");
 }
 
-/* FINALIZA INTRODUÇÃO */
+/* FINALIZAR INTRO */
 function finalizarIntro(){
 if(terminou)return;
 terminou=true;
@@ -378,7 +378,7 @@ intro.remove();
 },950);
 }
 
-/* AGENDA OS EFEITOS */
+/* AGENDAR ANIMAÇÕES */
 function agendar(fn,ms){
 tarefas.push(setTimeout(fn,ms));
 }
@@ -387,13 +387,13 @@ ajustar();
 window.addEventListener("resize",ajustar);
 requestAnimationFrame(desenhar);
 
-/* CONTAGEM COMEÇA MAIS CEDO */
+/* CONTAGEM MAIS CEDO */
 agendar(()=>mostrarNumero("3"),2700);
 agendar(()=>mostrarNumero("2"),3900);
 agendar(()=>mostrarNumero("1"),5100);
 agendar(()=>mostrarNumero("♥"),6300);
 
-/* REVELA O SITE */
+/* ENTRADA DO SITE */
 agendar(finalizarIntro,7700);
 </script>
 </body>
