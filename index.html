@@ -70,5 +70,146 @@ const n=Math.floor(Math.random()*frases.length);
 document.getElementById("mensagem").textContent=frases[n];
 }
 </script>
+
+<style>
+#introRoblox{
+position:fixed;inset:0;z-index:9999;
+background:#16051d;color:white;
+display:flex;align-items:center;
+justify-content:center;flex-direction:column;
+transition:opacity .7s;overflow:hidden
+}
+#introRoblox.fim{opacity:0;pointer-events:none}
+.cena{
+position:relative;width:95vw;max-width:420px;
+height:390px;overflow:hidden;border-radius:20px;
+background:linear-gradient(#514363,#211629)
+}
+.tituloCena{
+position:absolute;top:15px;width:100%;
+text-align:center;font-size:19px;color:white
+}
+.chao{
+position:absolute;bottom:0;width:100%;
+height:52px;background:#403144
+}
+.pc{
+position:absolute;left:12px;bottom:85px;
+font-size:68px;z-index:2
+}
+.avatar{
+position:absolute;bottom:45px;width:118px;
+height:190px;object-fit:cover;
+object-position:center;border-radius:12px;
+border:2px solid #cab5cf;z-index:3
+}
+#joaoR{left:53px}
+#samuelR{right:-140px}
+.marreta{
+position:absolute;right:77px;bottom:170px;
+font-size:58px;opacity:0;z-index:4;
+transform-origin:20% 90%
+}
+.pow{
+position:absolute;top:100px;width:100%;
+font-size:46px;font-weight:bold;color:#ffeb58;
+opacity:0;z-index:5
+}
+.flashR{
+position:absolute;inset:0;background:white;
+opacity:0;pointer-events:none;z-index:6
+}
+#introRoblox.rodando #samuelR{
+animation:chegar 1.3s .4s forwards
+}
+#introRoblox.rodando .marreta{
+animation:bater 1.2s 1.7s forwards
+}
+#introRoblox.rodando .cena{
+animation:tremer .4s 2.7s
+}
+#introRoblox.rodando .pow{
+animation:mostrar .7s 2.7s forwards
+}
+#introRoblox.rodando .flashR{
+animation:piscar .5s 2.7s
+}
+@keyframes chegar{
+to{right:25px}
+}
+@keyframes bater{
+0%{opacity:1;transform:rotate(-20deg)}
+55%{opacity:1;transform:rotate(-80deg)}
+100%{opacity:1;transform:rotate(50deg)}
+}
+@keyframes tremer{
+25%{transform:translateX(-12px)}
+50%{transform:translateX(12px)}
+75%{transform:translateX(-8px)}
+}
+@keyframes mostrar{
+30%,100%{opacity:1}
+}
+@keyframes piscar{
+30%{opacity:.9}
+100%{opacity:0}
+}
+#iniciarR{
+padding:17px 25px;background:#ff416b;
+border:0;border-radius:30px;
+color:white;font-size:18px;margin-top:25px
+}
+</style>
+
+<div id="introRoblox">
+<div class="cena">
+<div class="tituloCena">Uma surpresa para Samuel ❤️</div>
+<div class="chao"></div>
+<div class="pc">🖥️</div>
+<img id="joaoR" class="avatar"
+src="IMG_20261109_174503.jpg" alt="João">
+<img id="samuelR" class="avatar"
+src="IMG_20261109_174526.jpg" alt="Samuel">
+<div class="marreta">🔨</div>
+<div class="pow">POW! 💥</div>
+<div class="flashR"></div>
+</div>
+<button id="iniciarR" onclick="iniciarIntro()">
+▶ Começar surpresa
+</button>
+</div>
+
+<script>
+function iniciarIntro(){
+const intro=document.getElementById("introRoblox");
+const botao=document.getElementById("iniciarR");
+if(intro.classList.contains("rodando"))return;
+botao.style.display="none";
+intro.classList.add("rodando");
+
+try{
+const Audio=window.AudioContext||window.webkitAudioContext;
+const ctx=new Audio();
+ctx.resume();
+const osc=ctx.createOscillator();
+const ganho=ctx.createGain();
+const t=ctx.currentTime+2.7;
+osc.type="triangle";
+osc.frequency.setValueAtTime(160,t);
+osc.frequency.exponentialRampToValueAtTime(45,t+.2);
+ganho.gain.setValueAtTime(.001,t);
+ganho.gain.exponentialRampToValueAtTime(.5,t+.01);
+ganho.gain.exponentialRampToValueAtTime(.001,t+.25);
+osc.connect(ganho);
+ganho.connect(ctx.destination);
+osc.start(t);
+osc.stop(t+.26);
+}catch(e){}
+
+setTimeout(()=>intro.classList.add("fim"),3700);
+setTimeout(()=>intro.remove(),4500);
+}
+</script>
+  
 </body>
 </html>
