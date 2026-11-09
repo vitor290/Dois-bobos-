@@ -1,360 +1,367 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dois Bobos ❤️</title>
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#250008;
-color:white;
-text-align:center;
-}
+html,body{margin:0;padding:0;background:#250008;color:#fff;font-family:Arial,Helvetica,sans-serif;scroll-behavior:smooth}
+
+/* INTRO */
 body.introAtiva{overflow:hidden}
 
-/* CHUVA DE CORAÇÕES */
 #abertura{
 position:fixed;
 inset:0;
-z-index:99999;
+z-index:9999;
 background:#050006;
 display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-transition:opacity .9s ease;
 }
-#abertura.saindo{
-opacity:0;
-pointer-events:none;
-}
-#telaChuva{
+
+#chuva{
 position:absolute;
 inset:0;
-width:100%;
-height:100%;
+overflow:hidden;
+background:
+radial-gradient(circle at center, rgba(255,0,100,.08) 0%, rgba(0,0,0,0) 45%),
+linear-gradient(to bottom, #0a000d 0%, #160010 35%, #050006 100%);
 }
+
+.coluna{
+position:absolute;
+top:-140vh;
+font-size:12px;
+line-height:12px;
+white-space:pre;
+color:#ff5ea8;
+text-shadow:0 0 6px rgba(255,80,150,.7),0 0 14px rgba(255,80,150,.35);
+opacity:.95;
+animation-name:cair;
+animation-timing-function:linear;
+animation-iteration-count:1;
+}
+
+.coluna.fraca{opacity:.45;filter:blur(.3px)}
+.coluna.media{opacity:.75}
+.coluna.forte{opacity:1;text-shadow:0 0 8px rgba(255,120,180,.95),0 0 18px rgba(255,80,150,.55)}
+
+@keyframes cair{
+0%{transform:translateY(-120vh)}
+100%{transform:translateY(240vh)}
+}
+
 #contador{
 position:relative;
 z-index:2;
-font-size:clamp(95px,29vw,160px);
-font-weight:900;
-color:#ff85bc;
-text-shadow:
-0 0 15px #ff3e91,
-0 0 35px #dc0059,
-0 0 65px #8b003a;
-opacity:0;
-}
-#contador.visivel{opacity:1}
-#contador.pulso{
-animation:numeroEntrando .8s ease;
-}
-@keyframes numeroEntrando{
-0%{transform:scale(.4);opacity:0}
-45%{transform:scale(1.2);opacity:1}
-100%{transform:scale(1);opacity:1}
-}
-#pular{
-position:absolute;
-bottom:35px;
-right:20px;
-z-index:4;
-background:transparent;
-border:1px solid #8b375c;
-padding:11px 16px;
-font-size:13px;
-color:#ffb1d1;
-border-radius:25px;
+font-size:120px;
+font-weight:700;
+color:#ff7fc0;
+text-shadow:0 0 12px rgba(255,90,170,.95),0 0 28px rgba(255,60,150,.75),0 0 55px rgba(255,60,150,.45);
+transition:transform .25s ease, opacity .25s ease;
 }
 
-/* SITE ROMÂNTICO */
+#contador.pequeno{
+transform:scale(.86);
+opacity:.82;
+}
+
+#pular{
+position:absolute;
+right:18px;
+bottom:22px;
+z-index:3;
+padding:12px 18px;
+border:1px solid rgba(255,140,190,.65);
+border-radius:30px;
+background:rgba(25,0,20,.25);
+color:#ffd6e8;
+font-size:16px;
+backdrop-filter:blur(4px);
+}
+
+/* SITE */
 header{
-min-height:75vh;
-padding:75px 20px;
-background:linear-gradient(145deg,#560017,#b30934);
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
+padding:85px 20px;
+background:linear-gradient(180deg,#980028 0%,#c5003a 100%);
+text-align:center;
 }
-h1{
-font-size:clamp(30px,9vw,44px);
-margin:20px 0;
-}
-h2{color:#ff8fa5}
+
+h1{font-size:37px;margin:20px 0}
+h2{color:#ff8fa5;font-size:30px;margin:0 0 25px}
 p{line-height:1.7}
-.coracao{
-font-size:75px;
-animation:pulsar 1.5s infinite;
-}
-@keyframes pulsar{
-50%{transform:scale(1.15)}
-}
-section{padding:38px 20px}
+.coracao{font-size:65px;animation:pulsar 1.5s infinite}
+@keyframes pulsar{50%{transform:scale(1.15)}}
+
+section{padding:35px 20px}
 .card{
 background:#480b1c;
-border:1px solid #8f3048;
-border-radius:20px;
-padding:25px;
-margin:18px auto;
-max-width:450px;
+border:1px solid #8f2a45;
+border-radius:24px;
+padding:26px;
+max-width:700px;
+margin:0 auto;
+box-shadow:0 0 20px rgba(0,0,0,.15);
 }
+
 .fotos{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:12px;
-max-width:450px;
-margin:auto;
+gap:20px;
+max-width:700px;
+margin:0 auto;
 }
+
 .foto{
 background:#68162b;
-border-radius:15px;
-padding:45px 10px;
-min-height:190px;
+border-radius:18px;
+padding:15px;
+text-align:center;
+min-height:180px;
 display:flex;
 align-items:center;
 justify-content:center;
 flex-direction:column;
-color:#ffc5d3;
+overflow:hidden;
 }
-button{
+
+.foto img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:14px;
+display:block;
+}
+
+.botao{
 background:#ff416b;
-color:white;
-border:0;
-border-radius:30px;
-padding:16px 25px;
-font-size:16px;
-margin:10px;
+color:#fff;
+border:none;
+padding:18px 28px;
+border-radius:40px;
+font-size:18px;
+margin-top:20px;
 cursor:pointer;
 }
+
 footer{
-padding:35px;
-color:#ffb0c1;
+text-align:center;
+padding:35px 20px 60px;
+color:#ffd1db;
+font-size:18px;
+}
+
+@media(max-width:700px){
+#contador{font-size:110px}
+.fotos{grid-template-columns:1fr 1fr}
+.foto img{height:180px}
+}
+
+@media(max-width:520px){
+#contador{font-size:100px}
+.fotos{grid-template-columns:1fr 1fr}
+.foto img{height:150px}
 }
 </style>
 </head>
-
 <body class="introAtiva">
 
-<!-- ABERTURA -->
+<!-- INTRO -->
 <div id="abertura">
-<canvas id="telaChuva"></canvas>
-<div id="contador"></div>
-<button id="pular" onclick="finalizarAbertura()">
-Pular introdução
-</button>
+  <div id="chuva"></div>
+  <div id="contador">3</div>
+  <button id="pular">Pular introdução</button>
 </div>
 
 <!-- SITE -->
 <header>
-<div class="coracao">❤️</div>
-<h1>João Vitor & Samuel</h1>
-<p>Dois bobos, uma história só.</p>
-<p>Nosso cantinho especial ❤️</p>
+  <div class="coracao">❤️</div>
+  <h1>João Vitor & Samuel</h1>
+  <p style="font-size:22px">Dois bobos, uma história só.</p>
+  <p style="font-size:18px">Nosso cantinho especial ❤️</p>
 </header>
 
 <section>
-<h2>Nossa História 💌</h2>
-<div class="card">
-<p>
-Entre tantas pessoas no mundo,
-a vida colocou você na minha.
-</p>
-<p>
-E desde então, tudo ficou mais bonito.
-</p>
-</div>
+  <h2 style="text-align:center">Nossa História 💌</h2>
+  <div class="card">
+    <p style="font-size:20px;text-align:center">
+      Entre tantas pessoas no mundo, a vida colocou você na minha.<br><br>
+      E desde então, tudo ficou mais bonito.
+    </p>
+  </div>
 </section>
 
 <section>
-<h2>Nossas Memórias 📸</h2>
-<div class="fotos">
-<div class="foto">
-❤️
-<p>Nossa foto 1</p>
-</div>
-<div class="foto">
-❤️
-<p>Nossa foto 2</p>
-</div>
-</div>
+  <h2 style="text-align:center">Nossas Memórias 📸</h2>
+  <div class="fotos">
+    <div class="foto">
+      <img src="IMG_20261109_174503.jpg" alt="Foto João">
+      <p style="margin-top:12px">Nossa foto 1 ❤️</p>
+    </div>
+    <div class="foto">
+      <img src="IMG_20261109_174526.jpg" alt="Foto Samuel">
+      <p style="margin-top:12px">Nossa foto 2 ❤️</p>
+    </div>
+  </div>
 </section>
 
 <section>
-<h2>Uma mensagem para você 💕</h2>
-<div class="card">
-<p id="mensagem">
-Clique no coração para receber uma mensagem.
-</p>
-<button onclick="surpresa()">
-❤️ Abrir cartinha
-</button>
-</div>
+  <h2 style="text-align:center">Uma mensagem para você 💕</h2>
+  <div class="card" style="text-align:center">
+    <p id="mensagem" style="font-size:20px">Se eu pudesse escolher de novo, escolheria você. 💕</p>
+    <button class="botao" onclick="surpresa()">❤️ Abrir cartinha</button>
+  </div>
 </section>
 
 <section>
-<h2>Nossas Músicas 🎵</h2>
-<div class="card">
-<p>
-Uma música, uma lembrança e nós dois.
-</p>
-<p>
-Em breve, nossas músicas favoritas estarão aqui.
-</p>
-</div>
+  <h2 style="text-align:center">Nossas Músicas 🎵</h2>
+  <div class="card" style="text-align:center">
+    <p style="font-size:20px">Uma música, uma lembrança e nós dois.</p>
+    <p style="font-size:20px">Em breve, nossas músicas favoritas estarão aqui.</p>
+  </div>
 </section>
 
 <footer>
-Feito com amor ❤️
+  Feito com amor ❤️
 </footer>
 
 <script>
-/* FRASES */
 const frases=[
 "Você é uma das minhas partes favoritas da vida. ❤️",
 "Se eu pudesse escolher de novo, escolheria você. 💕",
-"Que a gente tenha muitas histórias para contar. 💌",
-"Você deixa meus dias mais bonitos. ❤️"
+"Que a gente tenha muitas histórias para contar juntos. ✨",
+"Você deixa meus dias mais bonitos. ❤️",
+"Nosso cantinho sempre vai ser especial. 💌"
 ];
 
 function surpresa(){
-const n=Math.floor(Math.random()*frases.length);
-document.getElementById("mensagem").textContent=frases[n];
+  const n=Math.floor(Math.random()*frases.length);
+  document.getElementById("mensagem").textContent=frases[n];
 }
 
-/* CHUVA DIGITAL DE CORAÇÕES */
-const canvas=document.getElementById("telaChuva");
-const ctx=canvas.getContext("2d");
-const abertura=document.getElementById("abertura");
+/* INTRO MAIS INTENSA */
+const chuva=document.getElementById("chuva");
 const contador=document.getElementById("contador");
+const abertura=document.getElementById("abertura");
+const pular=document.getElementById("pular");
 
-let largura=0;
-let altura=0;
-let colunas=[];
-let rodando=true;
-let terminou=false;
-let inicio=performance.now();
-let ultimo=0;
+function criarColuna(tipo="media"){
+  const c=document.createElement("div");
+  c.className="coluna "+tipo;
 
-function ajustarTela(){
-const d=Math.min(window.devicePixelRatio||1,2);
-largura=window.innerWidth;
-altura=window.innerHeight;
+  const total = Math.floor(Math.random()*34)+30; // mais corações por coluna
+  let texto="";
+  for(let i=0;i<total;i++){
+    texto+="♥\n";
+  }
+  c.textContent=texto;
 
-canvas.width=largura*d;
-canvas.height=altura*d;
-ctx.setTransform(d,0,0,d,0,0);
+  c.style.left=Math.random()*100+"vw";
+  c.style.animationDuration=(Math.random()*1.6+2.2)+"s"; // mais rápido
+  c.style.animationDelay=(Math.random()*0.25)+"s"; // quase instantâneo
+  c.style.fontSize=(Math.random()*6+9)+"px";
+  c.style.lineHeight=c.style.fontSize;
 
-colunas=[];
-const espacamento=9;
-const total=Math.ceil(largura/espacamento);
-
-for(let i=0;i<total;i++){
-colunas.push({
-x:i*espacamento+4,
-y:Math.random()*altura*.35-Math.random()*altura*.3,
-velocidade:.8+Math.random()*1.5,
-comprimento:14+Math.floor(Math.random()*32),
-fase:Math.random()*10
-});
-}
+  chuva.appendChild(c);
+  c.addEventListener("animationend",()=>c.remove());
 }
 
-function desenhar(tempo){
-if(!rodando)return;
-
-requestAnimationFrame(desenhar);
-
-if(tempo-ultimo<30)return;
-
-const passo=Math.min((tempo-ultimo)/16.7||1,3);
-ultimo=tempo;
-
-const decorrido=tempo-inicio;
-const intensidade=Math.min(decorrido/6200,1);
-
-ctx.fillStyle="#050006";
-ctx.fillRect(0,0,largura,altura);
-
-ctx.textAlign="center";
-ctx.textBaseline="middle";
-ctx.font="9px Arial";
-
-for(const c of colunas){
-c.y+=c.velocidade*(.8+intensidade*3)*passo;
-
-const tamanho=Math.round(
-c.comprimento*(.5+intensidade*.8)
-);
-
-if(c.y-tamanho*9>altura){
-c.y=-Math.random()*250;
+/* já começa forte */
+function chuvaInicial(){
+  for(let i=0;i<85;i++){
+    const r=Math.random();
+    if(r<0.25) criarColuna("fraca");
+    else if(r<0.7) criarColuna("media");
+    else criarColuna("forte");
+  }
 }
 
-for(let j=0;j<tamanho;j++){
-const y=c.y-j*9;
-if(y<0||y>altura)continue;
-
-const brilho=Math.max(.06,1-j/tamanho);
-const pulso=.8+.2*Math.sin(tempo*.003+c.fase);
-ctx.globalAlpha=brilho*pulso;
-
-if(j<2){
-ctx.fillStyle="#ffb0d3";
-}else if(j<7){
-ctx.fillStyle="#ff559b";
-}else if(j<17){
-ctx.fillStyle="#f02071";
-}else{
-ctx.fillStyle="#97003d";
+/* intensifica MUITO logo depois */
+function intensificarChuva(){
+  for(let i=0;i<140;i++){
+    setTimeout(()=>{
+      const r=Math.random();
+      if(r<0.2) criarColuna("fraca");
+      else if(r<0.55) criarColuna("media");
+      else criarColuna("forte");
+    }, Math.random()*700);
+  }
 }
 
-ctx.fillText("♥",c.x,y);
-}
-}
-
-ctx.globalAlpha=1;
-}
-
-function mostrarNumero(n){
-if(terminou)return;
-contador.textContent=n;
-contador.classList.add("visivel");
-contador.classList.remove("pulso");
-void contador.offsetWidth;
-contador.classList.add("pulso");
+/* mantém chuva pesada */
+let loopChuva;
+function manterChuva(){
+  loopChuva=setInterval(()=>{
+    for(let i=0;i<22;i++){
+      const r=Math.random();
+      if(r<0.2) criarColuna("fraca");
+      else if(r<0.55) criarColuna("media");
+      else criarColuna("forte");
+    }
+  },220);
 }
 
-function finalizarAbertura(){
-if(terminou)return;
-terminou=true;
-rodando=false;
-abertura.classList.add("saindo");
-document.body.classList.remove("introAtiva");
-
-setTimeout(()=>{
-abertura.remove();
-},950);
+function tocarBatida(){
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    const osc=ctx.createOscillator();
+    const ganho=ctx.createGain();
+    const t=ctx.currentTime;
+    osc.type="triangle";
+    osc.frequency.setValueAtTime(180,t);
+    ganho.gain.setValueAtTime(.001,t);
+    ganho.gain.exponentialRampToValueAtTime(.45,t+.01);
+    ganho.gain.exponentialRampToValueAtTime(.001,t+.20);
+    osc.connect(ganho);
+    ganho.connect(ctx.destination);
+    osc.start(t);
+    osc.stop(t+.21);
+  }catch(e){}
 }
 
-ajustarTela();
-window.addEventListener("resize",ajustarTela);
-requestAnimationFrame(desenhar);
+const numeros=["3","2","1"];
+let etapa=0;
 
-/* CONTAGEM REGRESSIVA */
-setTimeout(()=>mostrarNumero("3"),1900);
-setTimeout(()=>mostrarNumero("2"),3100);
-setTimeout(()=>mostrarNumero("1"),4300);
-setTimeout(()=>mostrarNumero("❤️"),5500);
-setTimeout(finalizarAbertura,6900);
+function atualizarContagem(){
+  contador.classList.add("pequeno");
+  setTimeout(()=>{
+    contador.classList.remove("pequeno");
+  },160);
+
+  contador.textContent=numeros[etapa];
+  tocarBatida();
+
+  if(etapa===0){
+    intensificarChuva();
+  }
+
+  etapa++;
+
+  if(etapa<3){
+    setTimeout(atualizarContagem,900);
+  }else{
+    setTimeout(finalizarIntro,900);
+  }
+}
+
+function finalizarIntro(){
+  abertura.style.transition="opacity .9s ease";
+  abertura.style.opacity="0";
+  setTimeout(()=>{
+    abertura.remove();
+    document.body.classList.remove("introAtiva");
+    clearInterval(loopChuva);
+  },900);
+}
+
+pular.onclick=finalizarIntro;
+
+chuvaInicial();
+manterChuva();
+setTimeout(atualizarContagem,500);
 </script>
-
 </body>
 </html>
-
