@@ -3,100 +3,88 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dois Bobos ❤️</title>
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
 margin:0;
-font-family:Arial,sans-serif;
 background:#250008;
 color:white;
+font-family:Arial,sans-serif;
 text-align:center;
 }
-body.introAtiva{overflow:hidden}
+body.travado{overflow:hidden}
 
-/* CHUVA DE CORAÇÕES */
-#abertura{
+/* ABERTURA */
+#intro{
 position:fixed;
 inset:0;
 z-index:99999;
+background:#080008;
+overflow:hidden;
 display:flex;
 align-items:center;
 justify-content:center;
-background:#120012;
-overflow:hidden;
-transition:opacity .85s ease;
+transition:opacity .9s ease;
 }
-#abertura.saindo{
+#intro.sumir{
 opacity:0;
 pointer-events:none;
 }
-#telaChuva{
+#chuva{
 position:absolute;
 inset:0;
 width:100%;
 height:100%;
-display:block;
 }
-#contador{
+#numero{
 position:relative;
 z-index:2;
-display:flex;
-align-items:center;
-justify-content:center;
-width:220px;
-height:220px;
-font-size:110px;
+font-size:clamp(90px,26vw,145px);
 font-weight:900;
-color:#ff9bcb;
+color:#ff91c1;
+line-height:1;
 text-shadow:
-0 0 12px #ff5da7,
-0 0 30px #ec267a,
-0 0 65px #bb0055;
-background:radial-gradient(
-circle,
-rgba(55,0,34,.7),
-transparent 68%
-);
+0 0 12px #ff4c9d,
+0 0 30px #e81c7c,
+0 0 60px #9d004c;
 opacity:0;
 }
-#contador.aparecer{
-animation:pulsarNumero .9s ease forwards;
+#numero.mostrar{
+animation:entradaNumero .9s ease forwards;
 }
-@keyframes pulsarNumero{
-0%{opacity:0;transform:scale(.45)}
-50%{opacity:1;transform:scale(1.17)}
+@keyframes entradaNumero{
+0%{opacity:0;transform:scale(.5)}
+45%{opacity:1;transform:scale(1.15)}
 100%{opacity:1;transform:scale(1)}
 }
 #pular{
 position:absolute;
 bottom:30px;
-right:18px;
+right:20px;
 z-index:3;
-padding:13px 18px;
-background:rgba(28,0,25,.55);
-color:#ffd5e7;
-border:1px solid #ff83b5;
+background:rgba(30,0,25,.55);
+border:1px solid #ab4a77;
+color:#ffd0e4;
+padding:13px 20px;
 border-radius:30px;
 font-size:14px;
 }
 
-/* SITE */
+/* SITE ROMÂNTICO */
 header{
 min-height:75vh;
-padding:80px 20px;
-background:linear-gradient(
-145deg,#560017,#b30934
-);
+background:linear-gradient(145deg,#560017,#b30934);
+padding:75px 20px;
 display:flex;
+flex-direction:column;
 align-items:center;
 justify-content:center;
-flex-direction:column;
 }
 h1{
-font-size:clamp(32px,9vw,44px);
+font-size:clamp(32px,9vw,45px);
 margin:20px 0;
 }
 h2{color:#ff8fa5}
@@ -127,17 +115,12 @@ margin:auto;
 .foto{
 background:#68162b;
 border-radius:15px;
-padding:18px 8px;
-min-height:190px;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
+padding:12px;
 overflow:hidden;
 }
 .foto img{
 width:100%;
-height:180px;
+height:190px;
 object-fit:cover;
 border-radius:12px;
 }
@@ -146,9 +129,8 @@ background:#ff416b;
 color:white;
 border:0;
 border-radius:30px;
-padding:16px 25px;
+padding:15px 23px;
 font-size:16px;
-margin:10px;
 cursor:pointer;
 }
 footer{
@@ -157,19 +139,18 @@ color:#ffb0c1;
 }
 </style>
 </head>
+<body class="travado">
 
-<body class="introAtiva">
-
-<!-- ABERTURA -->
-<div id="abertura">
-<canvas id="telaChuva"></canvas>
-<div id="contador" aria-live="polite"></div>
-<button id="pular" onclick="finalizarAbertura()">
+<!-- INTRO -->
+<div id="intro">
+<canvas id="chuva"></canvas>
+<div id="numero" aria-live="polite"></div>
+<button id="pular" onclick="finalizarIntro()">
 Pular introdução
 </button>
 </div>
 
-<!-- SITE ROMÂNTICO -->
+<!-- SITE -->
 <header>
 <div class="coracao">❤️</div>
 <h1>João Vitor & Samuel</h1>
@@ -227,6 +208,7 @@ Clique no coração para receber uma mensagem.
 <footer>Feito com amor ❤️</footer>
 
 <script>
+/* CARTINHAS */
 const frases=[
 "Você é uma das minhas partes favoritas da vida. ❤️",
 "Se eu pudesse escolher de novo, escolheria você. 💕",
@@ -238,188 +220,233 @@ const n=Math.floor(Math.random()*frases.length);
 document.getElementById("mensagem").textContent=frases[n];
 }
 
-/* CHUVA SUPER DENSA E LENTA */
-const tela=document.getElementById("telaChuva");
-const ctx=tela.getContext("2d");
-const abertura=document.getElementById("abertura");
-const contador=document.getElementById("contador");
+/* CHUVA COM PROFUNDIDADE */
+const canvas=document.getElementById("chuva");
+const ctx=canvas.getContext("2d");
+const intro=document.getElementById("intro");
+const numero=document.getElementById("numero");
 
 let largura=0;
 let altura=0;
-let colunas=[];
 let ativo=true;
-let terminou=false;
-let inicio=performance.now();
+let terminado=false;
 let ultimoFrame=0;
+const inicio=performance.now();
+const tarefas=[];
 
-const espacoX=7;
-const espacoY=8;
-const cores=[
-"#ffb4d6",
-"#ff82bb",
-"#ff58a5",
-"#f63189",
-"#db246e"
+/* TRÊS PLANOS DE PROFUNDIDADE */
+const planos=[
+{
+nome:"fundo",
+espacoX:9,
+espacoY:10,
+tamanho:9,
+velocidade:15,
+opacidade:.27,
+cor:"#b94b83",
+brilho:2,
+alcance:[.88,1.10],
+colunas:[]
+},
+{
+nome:"meio",
+espacoX:13,
+espacoY:12,
+tamanho:13,
+velocidade:23,
+opacidade:.64,
+cor:"#fb4d9c",
+brilho:5,
+alcance:[.65,1.12],
+colunas:[]
+},
+{
+nome:"frente",
+espacoX:23,
+espacoY:17,
+tamanho:19,
+velocidade:34,
+opacidade:.91,
+cor:"#ff9aca",
+brilho:8,
+alcance:[.40,1.08],
+colunas:[]
+}
 ];
 
-/* CORAÇÕES PRÉ-DESENHADOS */
-const imagens=cores.map(cor=>{
+/* CRIA CORAÇÕES COM BRILHO
+UMA ÚNICA VEZ PARA ECONOMIZAR
+PROCESSAMENTO DO CELULAR */
+function criarSprite(plano){
 const sprite=document.createElement("canvas");
-sprite.width=24;
-sprite.height=24;
+sprite.width=48;
+sprite.height=48;
 const s=sprite.getContext("2d");
-
-s.shadowColor=cor;
-s.shadowBlur=4;
-s.fillStyle=cor;
-s.font="bold 16px Arial";
+s.fillStyle=plano.cor;
+s.shadowColor=plano.cor;
+s.shadowBlur=plano.brilho*2;
+s.font="bold 31px Arial";
 s.textAlign="center";
 s.textBaseline="middle";
-s.fillText("♥",12,12);
-
+s.fillText("♥",24,24);
 return sprite;
+}
+planos.forEach(p=>{
+p.sprite=criarSprite(p);
 });
 
-function ajustarTela(){
+/* PREPARA A TELA VERTICAL */
+function ajustar(){
 const d=Math.min(devicePixelRatio||1,1.5);
-largura=innerWidth;
-altura=innerHeight;
-tela.width=Math.round(largura*d);
-tela.height=Math.round(altura*d);
+largura=window.innerWidth;
+altura=window.innerHeight;
+canvas.width=Math.round(largura*d);
+canvas.height=Math.round(altura*d);
 ctx.setTransform(d,0,0,d,0,0);
 
-colunas=[];
-const total=Math.ceil(largura/espacoX)+1;
+planos.forEach(p=>{
+p.colunas=[];
+const total=Math.ceil(largura/p.espacoX)+1;
 
 for(let i=0;i<total;i++){
-colunas.push({
-x:i*espacoX,
-atraso:Math.random()*.65,
-velocidade:13+Math.random()*14,
-fase:Math.random()*100,
-cor:Math.floor(Math.random()*cores.length)
+p.colunas.push({
+x:i*p.espacoX+
+(Math.random()-.5)*p.espacoX*.25,
+fase:Math.random()*p.espacoY,
+atraso:Math.random()*.9,
+alcance:p.alcance[0]+
+Math.random()*
+(p.alcance[1]-p.alcance[0]),
+semente:Math.random()*100
 });
 }
+});
 }
 
+/* FUNÇÃO AUXILIAR */
+function limitar(n,min,max){
+return Math.max(min,Math.min(max,n));
+}
+
+/* DESENHA A CHUVA */
 function desenhar(tempo){
 if(!ativo)return;
 requestAnimationFrame(desenhar);
 
-/* LIMITA A 25 QUADROS POR SEGUNDO */
-if(tempo-ultimoFrame<40)return;
+/* APROXIMADAMENTE 24 FPS */
+if(tempo-ultimoFrame<42)return;
 ultimoFrame=tempo;
 
 const segundos=(tempo-inicio)/1000;
-ctx.fillStyle="#120012";
-ctx.fillRect(0,0,largura,altura);
 
-/* BRILHO DO FUNDO */
-const fundo=ctx.createLinearGradient(
+/* FUNDO ESCURO */
+const gradiente=ctx.createLinearGradient(
 0,0,0,altura
 );
-fundo.addColorStop(0,"#1f001b");
-fundo.addColorStop(.5,"#35001f");
-fundo.addColorStop(1,"#280018");
-ctx.fillStyle=fundo;
+gradiente.addColorStop(0,"#080008");
+gradiente.addColorStop(.5,"#13000e");
+gradiente.addColorStop(1,"#080008");
+ctx.fillStyle=gradiente;
 ctx.fillRect(0,0,largura,altura);
 
-/* DESENHA A PAREDE DE CORAÇÕES */
-for(let c=0;c<colunas.length;c++){
-const coluna=colunas[c];
-const decorrido=Math.max(
-0,segundos-coluna.atraso
+/* DESENHA DO FUNDO PARA A FRENTE */
+for(const p of planos){
+for(const c of p.colunas){
+
+/* A CHUVA COMEÇA COM POUCOS
+PINGOS E PREENCHE EM 2,7 S */
+const progresso=limitar(
+(segundos-c.atraso)/2.7,
+0,1
 );
 
-/* A TELA ENCHE EM CERCA DE 3 SEGUNDOS */
-const preenchimento=Math.min(
-1,decorrido/2.5
-);
-const limite=preenchimento*(altura+20);
+if(progresso<=0)continue;
 
-/* MOVIMENTO LENTO PARA BAIXO */
+/* COLUNAS DE COMPRIMENTOS
+DIFERENTES, COMO NA REFERÊNCIA */
+const limiteY=
+altura*c.alcance*progresso;
+
+/* CADA PLANO CAI EM UMA
+VELOCIDADE DIFERENTE */
 const deslocamento=(
-decorrido*coluna.velocidade
-)%espacoY;
+c.fase+segundos*p.velocidade
+)%p.espacoY;
 
-const quantidade=Math.ceil(
-altura/espacoY
-)+3;
+for(
+let y=deslocamento-p.espacoY;
+y<limiteY&&y<altura;
+y+=p.espacoY
+){
+if(y<0)continue;
 
-for(let j=-2;j<quantidade;j++){
-const y=j*espacoY+deslocamento;
-
-if(y<0||y>limite||y>altura)continue;
-
-/* CORAÇÃO EM QUASE TODAS AS POSIÇÕES */
-const corIndex=(
-coluna.cor+
-Math.floor((j+coluna.fase)%5)
-)%5;
-
-const variacao=.76+
-.24*Math.sin(
-segundos*1.8+c*.37+j*.28
+/* VARIAÇÃO LEVE DO BRILHO */
+const brilho=.75+
+.25*Math.sin(
+segundos*1.6+
+c.semente+y*.025
 );
 
-const surgimento=Math.min(
-1,(limite-y+30)/40
+const aparecimento=limitar(
+(limiteY-y)/35,0,1
 );
 
-ctx.globalAlpha=Math.max(
-.4,variacao*surgimento
-);
+ctx.globalAlpha=
+p.opacidade*
+brilho*
+aparecimento;
 
-/* CORAÇÕES GRANDES O SUFICIENTE
-PARA NÃO DEIXAR FAIXAS PRETAS */
+/* CORAÇÕES MINÚSCULOS AO FUNDO
+E MAIORES NA FRENTE */
 ctx.drawImage(
-imagens[corIndex],
-coluna.x-2,
-y-4,
-11,
-11
+p.sprite,
+c.x-p.tamanho/2,
+y-p.tamanho/2,
+p.tamanho,
+p.tamanho
 );
 }
 }
-
+}
 ctx.globalAlpha=1;
 }
 
+/* CONTAGEM REGRESSIVA */
 function mostrarNumero(valor){
-if(terminou)return;
-contador.textContent=valor;
-contador.classList.remove("aparecer");
-void contador.offsetWidth;
-contador.classList.add("aparecer");
+if(terminado)return;
+numero.textContent=valor;
+numero.classList.remove("mostrar");
+void numero.offsetWidth;
+numero.classList.add("mostrar");
 }
 
-function finalizarAbertura(){
-if(terminou)return;
-terminou=true;
+/* TERMINA A INTRO */
+function finalizarIntro(){
+if(terminado)return;
+terminado=true;
 ativo=false;
-abertura.classList.add("saindo");
-document.body.classList.remove("introAtiva");
-
-setTimeout(()=>{
-abertura.remove();
-},900);
+tarefas.forEach(clearTimeout);
+intro.classList.add("sumir");
+document.body.classList.remove("travado");
+setTimeout(()=>intro.remove(),950);
 }
 
-/* INICIA A ANIMAÇÃO */
-ajustarTela();
-window.addEventListener("resize",ajustarTela);
+/* AGENDA A ANIMAÇÃO */
+function agendar(fn,ms){
+tarefas.push(setTimeout(fn,ms));
+}
+
+ajustar();
+window.addEventListener("resize",ajustar);
 requestAnimationFrame(desenhar);
 
-/* PRIMEIRO A CHUVA ENCHE A TELA */
-setTimeout(()=>mostrarNumero("3"),3300);
-setTimeout(()=>mostrarNumero("2"),4550);
-setTimeout(()=>mostrarNumero("1"),5800);
-setTimeout(()=>mostrarNumero("❤️"),7050);
-
-/* DEPOIS APARECE O SITE */
-setTimeout(finalizarAbertura,8200);
+/* PRIMEIRO OS CORAÇÕES
+DEPOIS A CONTAGEM */
+agendar(()=>mostrarNumero("3"),3500);
+agendar(()=>mostrarNumero("2"),4700);
+agendar(()=>mostrarNumero("1"),5900);
+agendar(()=>mostrarNumero("♥"),7100);
+agendar(finalizarIntro,8500);
 </script>
-
 </body>
 </html>
-
