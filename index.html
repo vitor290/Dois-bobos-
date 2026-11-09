@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dois Bobos ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#250008;color:#fff;font-family:Arial,sans-serif;text-align:center}
+header{padding:85px 20px;background:linear-gradient(145deg,#560017,#b30934)}
+h1{font-size:37px;margin:20px 0}
+h2{color:#ff8fa5}
+p{line-height:1.7}
+.coracao{font-size:65px;animation:pulsar 1.5s infinite}
+@keyframes pulsar{50%{transform:scale(1.15)}}
+section{padding:35px 20px}
+.card{background:#480b1c;border:1px solid #8f3048;border-radius:20px;padding:24px;margin:18px auto;max-width:450px}
+.fotos{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:450px;margin:auto}
+.foto{background:#68162b;border-radius:15px;padding:50px 8px;color:#ffb9c8}
+button{background:#ff416b;color:white;border:0;border-radius:30px;padding:16px 25px;font-size:16px;margin:10px;cursor:pointer}
+footer{padding:30px;color:#ffb0c1}
+</style>
+</head>
+<body>
+<header>
+<div class="coracao">❤️</div>
+<h1>João Vitor & Samuel</h1>
+<p>Dois bobos, uma história só.</p>
+<p>Nosso cantinho especial ❤️</p>
+</header>
+<section>
+<h2>Nossa História 💌</h2>
+<div class="card">
+<p>Entre tantas pessoas no mundo, a vida colocou você na minha.</p>
+<p>E desde então, tudo ficou mais bonito.</p>
+</div>
+</section>
+<section>
+<h2>Nossas Memórias 📸</h2>
+<div class="fotos">
+<div class="foto">❤️<p>Nossa foto 1</p></div>
+<div class="foto">❤️<p>Nossa foto 2</p></div>
+</div>
+</section>
+<section>
+<h2>Uma mensagem para você 💕</h2>
+<div class="card">
+<p id="mensagem">Clique no coração para receber uma mensagem.</p>
+<button onclick="surpresa()">❤️ Abrir cartinha</button>
+</div>
+</section>
+<section>
+<h2>Nossas Músicas 🎵</h2>
+<div class="card">
+<p>Uma música, uma lembrança e nós dois.</p>
+<p>Em breve, nossas músicas favoritas estarão aqui.</p>
+</div>
+</section>
+<footer>Feito com amor ❤️</footer>
+<script>
+const frases=[
+"Você é uma das minhas partes favoritas da vida. ❤️",
+"Se eu pudesse escolher de novo, escolheria você. 💕",
+"Que a gente tenha muitas histórias para contar. 💌",
+"Você deixa meus dias mais bonitos. ❤️"
+];
+function surpresa(){
+const n=Math.floor(Math.random()*frases.length);
+document.getElementById("mensagem").textContent=frases[n];
+}
+</script>
+</body>
+</html>
