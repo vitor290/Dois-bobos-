@@ -22,11 +22,11 @@ body.travado{overflow:hidden}
 position:fixed;
 inset:0;
 z-index:99999;
-background:#080008;
-overflow:hidden;
+background:#050006;
 display:flex;
 align-items:center;
 justify-content:center;
+overflow:hidden;
 transition:opacity .9s ease;
 }
 #intro.sumir{
@@ -38,37 +38,38 @@ position:absolute;
 inset:0;
 width:100%;
 height:100%;
+display:block;
 }
 #numero{
 position:relative;
 z-index:2;
-font-size:clamp(90px,26vw,145px);
+font-size:clamp(95px,28vw,150px);
 font-weight:900;
 color:#ff91c1;
-line-height:1;
 text-shadow:
-0 0 12px #ff4c9d,
+0 0 14px #ff4c9d,
 0 0 30px #e81c7c,
-0 0 60px #9d004c;
+0 0 55px #9d004c;
 opacity:0;
+line-height:1;
 }
 #numero.mostrar{
-animation:entradaNumero .9s ease forwards;
+animation:entradaNumero .8s ease forwards;
 }
 @keyframes entradaNumero{
 0%{opacity:0;transform:scale(.5)}
-45%{opacity:1;transform:scale(1.15)}
+50%{opacity:1;transform:scale(1.16)}
 100%{opacity:1;transform:scale(1)}
 }
 #pular{
 position:absolute;
 bottom:30px;
-right:20px;
+right:18px;
 z-index:3;
-background:rgba(30,0,25,.55);
-border:1px solid #ab4a77;
+background:rgba(25,0,25,.6);
+border:1px solid #a84a76;
 color:#ffd0e4;
-padding:13px 20px;
+padding:12px 17px;
 border-radius:30px;
 font-size:14px;
 }
@@ -139,12 +140,13 @@ color:#ffb0c1;
 }
 </style>
 </head>
+
 <body class="travado">
 
 <!-- INTRO -->
 <div id="intro">
 <canvas id="chuva"></canvas>
-<div id="numero" aria-live="polite"></div>
+<div id="numero"></div>
 <button id="pular" onclick="finalizarIntro()">
 Pular introdução
 </button>
@@ -161,13 +163,8 @@ Pular introdução
 <section>
 <h2>Nossa História 💌</h2>
 <div class="card">
-<p>
-Entre tantas pessoas no mundo,
-a vida colocou você na minha.
-</p>
-<p>
-E desde então, tudo ficou mais bonito.
-</p>
+<p>Entre tantas pessoas no mundo, a vida colocou você na minha.</p>
+<p>E desde então, tudo ficou mais bonito.</p>
 </div>
 </section>
 
@@ -220,7 +217,7 @@ const n=Math.floor(Math.random()*frases.length);
 document.getElementById("mensagem").textContent=frases[n];
 }
 
-/* CHUVA COM PROFUNDIDADE */
+/* CHUVA DE CORAÇÕES */
 const canvas=document.getElementById("chuva");
 const ctx=canvas.getContext("2d");
 const intro=document.getElementById("intro");
@@ -228,210 +225,160 @@ const numero=document.getElementById("numero");
 
 let largura=0;
 let altura=0;
+let colunas=[];
 let ativo=true;
-let terminado=false;
-let ultimoFrame=0;
+let terminou=false;
+let ultimo=performance.now();
 const inicio=performance.now();
 const tarefas=[];
 
-/* TRÊS PLANOS DE PROFUNDIDADE */
-const planos=[
-{
-nome:"fundo",
-espacoX:9,
-espacoY:10,
-tamanho:9,
-velocidade:15,
-opacidade:.27,
-cor:"#b94b83",
-brilho:2,
-alcance:[.88,1.10],
-colunas:[]
-},
-{
-nome:"meio",
-espacoX:13,
-espacoY:12,
-tamanho:13,
-velocidade:23,
-opacidade:.64,
-cor:"#fb4d9c",
-brilho:5,
-alcance:[.65,1.12],
-colunas:[]
-},
-{
-nome:"frente",
-espacoX:23,
-espacoY:17,
-tamanho:19,
-velocidade:34,
-opacidade:.91,
-cor:"#ff9aca",
-brilho:8,
-alcance:[.40,1.08],
-colunas:[]
-}
-];
+/* CONFIGURAÇÃO DA CHUVA */
+const espacoFrente=9;
+const espacoFundo=18;
 
-/* CRIA CORAÇÕES COM BRILHO
-UMA ÚNICA VEZ PARA ECONOMIZAR
-PROCESSAMENTO DO CELULAR */
-function criarSprite(plano){
-const sprite=document.createElement("canvas");
-sprite.width=48;
-sprite.height=48;
-const s=sprite.getContext("2d");
-s.fillStyle=plano.cor;
-s.shadowColor=plano.cor;
-s.shadowBlur=plano.brilho*2;
-s.font="bold 31px Arial";
-s.textAlign="center";
-s.textBaseline="middle";
-s.fillText("♥",24,24);
-return sprite;
-}
-planos.forEach(p=>{
-p.sprite=criarSprite(p);
-});
-
-/* PREPARA A TELA VERTICAL */
 function ajustar(){
 const d=Math.min(devicePixelRatio||1,1.5);
-largura=window.innerWidth;
-altura=window.innerHeight;
-canvas.width=Math.round(largura*d);
-canvas.height=Math.round(altura*d);
+largura=innerWidth;
+altura=innerHeight;
+canvas.width=largura*d;
+canvas.height=altura*d;
 ctx.setTransform(d,0,0,d,0,0);
 
-planos.forEach(p=>{
-p.colunas=[];
-const total=Math.ceil(largura/p.espacoX)+1;
+colunas=[];
 
-for(let i=0;i<total;i++){
-p.colunas.push({
-x:i*p.espacoX+
-(Math.random()-.5)*p.espacoX*.25,
-fase:Math.random()*p.espacoY,
-atraso:Math.random()*.9,
-alcance:p.alcance[0]+
-Math.random()*
-(p.alcance[1]-p.alcance[0]),
-semente:Math.random()*100
+/* CORAÇÕES PEQUENOS AO FUNDO */
+for(let x=0;x<largura;x+=espacoFundo){
+colunas.push({
+x:x+Math.random()*5,
+y:Math.random()*altura*.65-altura*.4,
+vel:17+Math.random()*14,
+n:12+Math.floor(Math.random()*18),
+passo:10,
+tamanho:8,
+alpha:.3,
+fundo:true,
+ativar:Math.random(),
+fase:Math.random()*10
 });
 }
+
+/* CORAÇÕES PRINCIPAIS */
+for(let x=0;x<largura;x+=espacoFrente){
+colunas.push({
+x:x+Math.random()*3,
+y:Math.random()*altura*.75-altura*.35,
+vel:28+Math.random()*20,
+n:14+Math.floor(Math.random()*21),
+passo:10,
+tamanho:10,
+alpha:.85,
+fundo:false,
+ativar:Math.random(),
+fase:Math.random()*10
 });
 }
-
-/* FUNÇÃO AUXILIAR */
-function limitar(n,min,max){
-return Math.max(min,Math.min(max,n));
 }
 
-/* DESENHA A CHUVA */
 function desenhar(tempo){
 if(!ativo)return;
 requestAnimationFrame(desenhar);
 
-/* APROXIMADAMENTE 24 FPS */
-if(tempo-ultimoFrame<42)return;
-ultimoFrame=tempo;
+/* LIMITA A CERCA DE 30 FPS */
+if(tempo-ultimo<33)return;
+
+const dt=Math.min((tempo-ultimo)/1000,.06);
+ultimo=tempo;
 
 const segundos=(tempo-inicio)/1000;
 
-/* FUNDO ESCURO */
-const gradiente=ctx.createLinearGradient(
-0,0,0,altura
-);
-gradiente.addColorStop(0,"#080008");
-gradiente.addColorStop(.5,"#13000e");
-gradiente.addColorStop(1,"#080008");
-ctx.fillStyle=gradiente;
+/* FUNDO ESCURO COMO A REFERÊNCIA */
+ctx.fillStyle="#050006";
 ctx.fillRect(0,0,largura,altura);
 
-/* DESENHA DO FUNDO PARA A FRENTE */
-for(const p of planos){
-for(const c of p.colunas){
-
-/* A CHUVA COMEÇA COM POUCOS
-PINGOS E PREENCHE EM 2,7 S */
-const progresso=limitar(
-(segundos-c.atraso)/2.7,
-0,1
+/* COMEÇA COM POUCOS CORAÇÕES
+E INTENSIFICA EM 1,7 SEGUNDO */
+const intensidade=Math.min(
+1,.28+segundos*.48
 );
 
-if(progresso<=0)continue;
+for(const c of colunas){
+if(c.ativar>intensidade)continue;
 
-/* COLUNAS DE COMPRIMENTOS
-DIFERENTES, COMO NA REFERÊNCIA */
-const limiteY=
-altura*c.alcance*progresso;
+c.y+=c.vel*dt;
 
-/* CADA PLANO CAI EM UMA
-VELOCIDADE DIFERENTE */
-const deslocamento=(
-c.fase+segundos*p.velocidade
-)%p.espacoY;
+/* RECOMEÇA A COLUNA DEPOIS
+QUE ELA SAI DA TELA */
+if(c.y-c.n*c.passo>altura){
+c.y=-Math.random()*altura*.3;
+}
 
-for(
-let y=deslocamento-p.espacoY;
-y<limiteY&&y<altura;
-y+=p.espacoY
-){
-if(y<0)continue;
+ctx.textAlign="center";
+ctx.textBaseline="middle";
+ctx.font=c.tamanho+"px Arial";
 
-/* VARIAÇÃO LEVE DO BRILHO */
-const brilho=.75+
-.25*Math.sin(
-segundos*1.6+
-c.semente+y*.025
+/* DESENHA A CAUDA DE CORAÇÕES */
+for(let i=0;i<c.n;i++){
+const y=c.y-i*c.passo;
+if(y<0||y>altura)continue;
+
+const brilho=Math.pow(
+1-i/c.n,1.25
 );
 
-const aparecimento=limitar(
-(limiteY-y)/35,0,1
+const pulso=.85+
+.15*Math.sin(
+tempo*.002+c.fase+i*.2
 );
 
 ctx.globalAlpha=
-p.opacidade*
-brilho*
-aparecimento;
+c.alpha*brilho*pulso;
 
-/* CORAÇÕES MINÚSCULOS AO FUNDO
-E MAIORES NA FRENTE */
-ctx.drawImage(
-p.sprite,
-c.x-p.tamanho/2,
-y-p.tamanho/2,
-p.tamanho,
-p.tamanho
-);
+/* PONTAS MAIS BRILHANTES */
+if(c.fundo){
+ctx.fillStyle="#a83b78";
+}else if(i<2){
+ctx.fillStyle="#ffacd5";
+}else if(i<7){
+ctx.fillStyle="#ff5ea4";
+}else if(i<15){
+ctx.fillStyle="#ec2775";
+}else{
+ctx.fillStyle="#9d124f";
+}
+
+ctx.fillText("♥",c.x,y);
 }
 }
-}
+
 ctx.globalAlpha=1;
 }
 
-/* CONTAGEM REGRESSIVA */
+/* CONTAGEM */
 function mostrarNumero(valor){
-if(terminado)return;
+if(terminou)return;
+
 numero.textContent=valor;
 numero.classList.remove("mostrar");
 void numero.offsetWidth;
 numero.classList.add("mostrar");
 }
 
-/* TERMINA A INTRO */
+/* FINALIZA INTRODUÇÃO */
 function finalizarIntro(){
-if(terminado)return;
-terminado=true;
+if(terminou)return;
+terminou=true;
 ativo=false;
+
 tarefas.forEach(clearTimeout);
 intro.classList.add("sumir");
 document.body.classList.remove("travado");
-setTimeout(()=>intro.remove(),950);
+
+setTimeout(()=>{
+intro.remove();
+},950);
 }
 
-/* AGENDA A ANIMAÇÃO */
+/* AGENDA OS EFEITOS */
 function agendar(fn,ms){
 tarefas.push(setTimeout(fn,ms));
 }
@@ -440,13 +387,13 @@ ajustar();
 window.addEventListener("resize",ajustar);
 requestAnimationFrame(desenhar);
 
-/* PRIMEIRO OS CORAÇÕES
-DEPOIS A CONTAGEM */
-
+/* CONTAGEM COMEÇA MAIS CEDO */
 agendar(()=>mostrarNumero("3"),2700);
 agendar(()=>mostrarNumero("2"),3900);
 agendar(()=>mostrarNumero("1"),5100);
 agendar(()=>mostrarNumero("♥"),6300);
+
+/* REVELA O SITE */
 agendar(finalizarIntro,7700);
 </script>
 </body>
