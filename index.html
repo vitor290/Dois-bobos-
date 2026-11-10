@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,710 +7,201 @@
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-margin:0;
-background:#250008;
-color:white;
-font-family:Arial,sans-serif;
-text-align:center;
-}
+body{margin:0;background:#fff1f3;color:#641a32;font-family:Arial,sans-serif;text-align:center}
 body.travado{overflow:hidden}
-button{
-font-family:inherit;
-cursor:pointer;
-}
-
-/* FUNDO DA BILLIE EILISH */
-#capa{
-position:fixed;
-inset:0;
-z-index:100001;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:12px;
-background:
-linear-gradient(
-rgba(0,0,0,.10),
-rgba(0,0,0,.15)
-),
-url("fcf3bf12b84d9f7d6393a8ce6f7948ad.jpg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-overflow-y:auto;
-transition:opacity .6s ease;
-}
-#capa.sumir{
-opacity:0;
-pointer-events:none;
-}
-
-/* CAIXA TRANSPARENTE MAIS COMPACTA */
-.senha-box{
-width:min(88vw,246px);
-max-width:246px;
-padding:13px 9px 10px;
-background:rgba(255,255,255,.25);
-backdrop-filter:blur(2px);
--webkit-backdrop-filter:blur(2px);
-border:1.5px solid rgba(255,255,255,.75);
-border-radius:21px;
-box-shadow:0 12px 35px rgba(0,0,0,.20);
-color:#102c5b;
-}
-
-/* TÍTULO MENOR */
-.senha-box h1{
-font-size:21px;
-color:#102c5b;
-font-weight:900;
-margin:0 0 10px;
-text-shadow:0 1px 3px #ffffff99;
-}
-
-/* QUATRO DÍGITOS JUNTINHOS */
-.digitos{
-display:flex;
-justify-content:center;
-gap:5px;
-margin:0 0 2px;
-}
-
-.digito{
-width:39px;
-height:43px;
-background:rgba(255,255,255,.65);
-border:2px solid #173766;
-border-radius:9px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:22px;
-font-weight:bold;
-color:#102c5b;
-}
-
-.digito.ativo{
-background:rgba(255,255,255,.90);
-border-color:#0b2856;
-}
-
-/* DICA MAIS PRÓXIMA */
-.dica{
-font-size:11px;
-color:#102c5b;
-font-weight:600;
-margin:2px 0 8px;
-text-shadow:0 1px 2px #ffffff99;
-}
-
-/* TECLADO MENOR */
-.teclado-area{
-width:100%;
-max-width:214px;
-margin:0 auto;
-padding:7px;
-background:rgba(255,255,255,.65);
-border:2.5px solid #173766;
-border-radius:19px;
-}
-
-.teclado{
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:6px;
-}
-
-.tecla{
-width:100%;
-height:41px;
-background:#173766;
-color:#ffffff;
-border:1px solid #0c2850;
-border-radius:9px;
-font-size:19px;
-font-weight:800;
-box-shadow:0 3px 0 #071b38;
-transition:transform .12s;
-}
-
-.tecla:active{
-transform:translateY(3px);
-box-shadow:none;
-background:#254c85;
-}
-
-.tecla.del{
-font-size:12px;
-}
-
-#erro:empty{
-display:none;
-}
-#erro:not(:empty){
-font-size:11px;
-font-weight:700;
-color:#981b32;
-margin-top:7px;
-}
-
-/* CHUVA DE CORAÇÕES */
-#intro{
-display:none;
-position:fixed;
-inset:0;
-z-index:100000;
-background:#050006;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-transition:opacity .9s ease;
-}
-#intro.sumir{
-opacity:0;
-pointer-events:none;
-}
-
-#chuva{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-display:block;
-}
-
-#numero{
-position:relative;
-z-index:2;
-font-size:clamp(95px,28vw,150px);
-font-weight:900;
-color:#ff91c1;
-text-shadow:
-0 0 14px #ff4c9d,
-0 0 30px #e81c7c,
-0 0 55px #9d004c;
-opacity:0;
-line-height:1;
-}
-
-#numero.mostrar{
-animation:entradaNumero .8s ease forwards;
-}
-
-@keyframes entradaNumero{
-0%{
-opacity:0;
-transform:scale(.5);
-}
-50%{
-opacity:1;
-transform:scale(1.16);
-}
-100%{
-opacity:1;
-transform:scale(1);
-}
-}
-
-#pular{
-position:absolute;
-bottom:30px;
-right:18px;
-z-index:3;
-background:rgba(25,0,25,.6);
-border:1px solid #a84a76;
-color:#ffd0e4;
-padding:12px 17px;
-border-radius:30px;
-font-size:14px;
-}
-
-/* SITE ROMÂNTICO */
-header{
-min-height:75vh;
-background:linear-gradient(145deg,#560017,#b30934);
-padding:75px 20px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-}
-
-header h1{
-font-size:clamp(32px,9vw,45px);
-margin:20px 0;
-}
-
-h2{color:#ff8fa5}
-p{line-height:1.7}
-
-.coracao{
-font-size:75px;
-animation:pulsar 1.5s infinite;
-}
-
-@keyframes pulsar{
-50%{transform:scale(1.15)}
-}
-
-section{padding:38px 20px}
-
-.card{
-background:#480b1c;
-border:1px solid #8f3048;
-border-radius:20px;
-padding:25px;
-margin:18px auto;
-max-width:450px;
-}
-
-.fotos{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-max-width:450px;
-margin:auto;
-}
-
-.foto{
-background:#68162b;
-border-radius:15px;
-padding:12px;
-overflow:hidden;
-}
-
-.foto img{
-width:100%;
-height:190px;
-object-fit:cover;
-border-radius:12px;
-}
-
-.botao{
-background:#ff416b;
-color:white;
-border:0;
-border-radius:30px;
-padding:15px 23px;
-font-size:16px;
-margin:10px;
-}
-
-footer{
-padding:35px;
-color:#ffb0c1;
-}
-
-/* TELAS PEQUENAS */
-@media(max-width:350px){
-.senha-box{
-width:88vw;
-padding:12px 7px 9px;
-}
-.senha-box h1{
-font-size:20px;
-}
-.teclado-area{
-max-width:205px;
-}
-.tecla{
-height:40px;
-}
-.digito{
-width:38px;
-height:42px;
-}
-}
+button{font-family:inherit;cursor:pointer}
+/* SENHA */
+#capaSenha{position:fixed;inset:0;z-index:1001;display:flex;align-items:center;justify-content:center;padding:12px;background:linear-gradient(#0002,#0003),url('fcf3bf12b84d9f7d6393a8ce6f7948ad.jpg') center/cover no-repeat;transition:opacity .6s}
+#capaSenha.sumir{opacity:0;pointer-events:none}
+.senha-box{width:min(88vw,246px);padding:13px 9px 10px;background:#ffffff40;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border:1.5px solid #ffffffc0;border-radius:21px;color:#102c5b;box-shadow:0 12px 35px #0003}
+.senha-box h1{font-size:21px;white-space:nowrap;margin:0 0 10px;color:#102c5b}
+.digitos{display:flex;justify-content:center;gap:5px;margin:0 0 2px}
+.digito{width:39px;height:43px;display:grid;place-items:center;background:#ffffffb0;border:2px solid #173766;border-radius:9px;font-size:22px;font-weight:bold}
+.dica{font-size:11px;font-weight:bold;margin:2px 0 8px}
+.teclado-area{max-width:214px;margin:auto;padding:7px;border:2.5px solid #173766;border-radius:19px;background:#ffffffb5}
+.teclado{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.tecla{height:41px;border:1px solid #0c2850;border-radius:9px;background:#173766;color:white;font-size:19px;font-weight:800;box-shadow:0 3px 0 #071b38}
+.tecla:active{transform:translateY(2px);box-shadow:none}
+.tecla.del{font-size:12px}
+#erro{font-size:11px;color:#8e1333;font-weight:bold;margin-top:7px}
+#erro:empty{display:none}
+/* ABERTURA COM CORAÇÕES */
+#intro{display:none;position:fixed;inset:0;z-index:1000;background:#050006;align-items:center;justify-content:center;overflow:hidden;transition:opacity .9s}
+#intro.sumir{opacity:0;pointer-events:none}
+#chuva{position:absolute;inset:0;width:100%;height:100%}
+#numero{position:relative;z-index:1;opacity:0;font-size:clamp(95px,28vw,150px);font-weight:900;color:#ff91c1;text-shadow:0 0 14px #ff4c9d,0 0 32px #e81c7c}
+#numero.mostrar{animation:entradaNumero .8s ease forwards}
+@keyframes entradaNumero{0%{opacity:0;transform:scale(.5)}50%{opacity:1;transform:scale(1.16)}100%{opacity:1;transform:scale(1)}}
+#pular{position:absolute;bottom:28px;right:18px;z-index:2;padding:12px 17px;border:1px solid #a84a76;border-radius:30px;background:#190019b0;color:#ffd0e4}
+/* PÁGINA PRINCIPAL */
+#site{background:linear-gradient(180deg,#ffe6eb 0%,#fff7f8 55%,#fff0f4 100%);min-height:100vh}
+.capa-site{position:relative;width:100%;height:clamp(185px,52vw,340px);overflow:hidden;background:linear-gradient(135deg,#602136,#d4829b)}
+.capa-site img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 42%;opacity:0;transition:opacity .4s}
+#capaPendente{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;padding:20px}
+.capa-site::after{content:"";position:absolute;inset:auto 0 0;height:28px;background:linear-gradient(transparent,#fff0f4aa);pointer-events:none}
+.apresentacao{padding:24px 16px 28px}
+.ornamento{font-size:30px;color:#ab254d}
+.apresentacao h1{font-family:Georgia,serif;font-style:italic;color:#80152e;font-size:clamp(31px,9vw,48px);margin:7px 0}
+.apresentacao p{font-size:15px;line-height:1.7;margin:10px auto;max-width:370px}
+.nomescasal{font-size:13px;color:#ae4565;font-weight:bold;letter-spacing:.3px}
+.atalhos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:700px;margin:18px auto 0}
+.atalhos a{min-height:82px;padding:12px 3px;border-radius:15px;background:#f9d8df;color:#861e39;text-decoration:none;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px}
+.atalhos span{font-size:26px}
+section{padding:16px 18px 24px;max-width:720px;margin:auto}
+h2{font-family:Georgia,serif;color:#871b37;font-size:27px;margin:9px 0 17px}
+.cartao{background:#f9dce3;border:1px solid #f3c6d2;border-radius:21px;padding:21px 18px;box-shadow:0 5px 16px #8b1f3c0d}
+.cartao p{line-height:1.7;margin:10px 0;color:#63233a}
+.carta-destaque{display:flex;text-align:left;align-items:center;gap:14px}
+.icone-carta{font-size:42px;flex:none}
+.carta-destaque h2{font-size:23px;margin:0}
+.acessar{margin:15px auto 0;padding:12px 19px;border-radius:30px;border:0;background:#b82b57;color:white;font-size:15px}
+.fotos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.foto{background:#f6d5df;border-radius:17px;padding:9px;overflow:hidden}
+.foto img{width:100%;height:175px;object-fit:cover;border-radius:12px;display:block}
+.foto p{font-size:13px;color:#831d3a;margin:10px 0 2px}
+footer{padding:36px 15px;color:#93284d;font-size:18px;font-family:Georgia,serif;font-style:italic}
+@media(max-width:360px){.atalhos a{font-size:11px}.atalhos span{font-size:22px}.senha-box{width:246px;max-width:94vw}}
 </style>
 </head>
-
 <body class="travado">
-
-<!-- TELA DE SENHA -->
-<div id="capa">
-<div class="senha-box">
-
+<!-- TELA DA SENHA -->
+<div id="capaSenha"><div class="senha-box">
 <h1>Digite a senha</h1>
-
-<div class="digitos">
-<div class="digito"></div>
-<div class="digito"></div>
-<div class="digito"></div>
-<div class="digito"></div>
-</div>
-
+<div class="digitos"><div class="digito"></div><div class="digito"></div><div class="digito"></div><div class="digito"></div></div>
 <p class="dica">dica:0807</p>
-
-<div class="teclado-area">
-<div class="teclado">
-
-<button class="tecla" data-n="1">1</button>
-<button class="tecla" data-n="2">2</button>
-<button class="tecla" data-n="3">3</button>
-
-<button class="tecla" data-n="4">4</button>
-<button class="tecla" data-n="5">5</button>
-<button class="tecla" data-n="6">6</button>
-
-<button class="tecla" data-n="7">7</button>
-<button class="tecla" data-n="8">8</button>
-<button class="tecla" data-n="9">9</button>
-
-<div></div>
-<button class="tecla" data-n="0">0</button>
-<button class="tecla del" id="apagar">DEL</button>
-
+<div class="teclado-area"><div class="teclado">
+<button class="tecla" data-n="1">1</button><button class="tecla" data-n="2">2</button><button class="tecla" data-n="3">3</button>
+<button class="tecla" data-n="4">4</button><button class="tecla" data-n="5">5</button><button class="tecla" data-n="6">6</button>
+<button class="tecla" data-n="7">7</button><button class="tecla" data-n="8">8</button><button class="tecla" data-n="9">9</button>
+<div></div><button class="tecla" data-n="0">0</button><button class="tecla del" id="apagar">DEL</button>
+</div></div><div id="erro" aria-live="polite"></div>
+</div></div>
+<!-- CHUVA + CONTAGEM -->
+<div id="intro"><canvas id="chuva"></canvas><div id="numero"></div><button id="pular">Pular introdução</button></div>
+<!-- SITE COM FOTO DE CAPA NO TOPO -->
+<main id="site">
+<div class="capa-site"><img id="fotoCapa" alt="Nossa foto de capa"><div id="capaPendente">Nossa foto de capa ♡</div></div>
+<div class="apresentacao">
+<div class="ornamento">♡</div>
+<h1>Nosso Cantinho ♥</h1>
+<div class="nomescasal">João Vitor &amp; Samuel</div>
+<p>Dois bobos, uma história só.<br>Um lugar para guardar nossas memórias. ♡</p>
+<nav class="atalhos">
+<a href="#historia"><span>♡</span>Nossa<br>História</a>
+<a href="#fotos"><span>▧</span>Fotos</a>
+<a href="#cartinha"><span>✉</span>Cartinha</a>
+<a href="#musicas"><span>♫</span>Músicas</a>
+</nav>
 </div>
-</div>
-
-<div id="erro" aria-live="polite"></div>
-
-</div>
-</div>
-
-<!-- CHUVA DE CORAÇÕES -->
-<div id="intro">
-<canvas id="chuva"></canvas>
-<div id="numero"></div>
-<button id="pular" onclick="finalizarIntro()">
-Pular introdução
-</button>
-</div>
-
-<!-- SITE ROMÂNTICO -->
-<header>
-<div class="coracao">❤️</div>
-<h1>João Vitor & Samuel</h1>
-<p>Dois bobos, uma história só.</p>
-<p>Nosso cantinho especial ❤️</p>
-</header>
-
-<section>
-<h2>Nossa História 💌</h2>
-<div class="card">
-<p>
-Entre tantas pessoas no mundo,
-a vida colocou você na minha.
-</p>
-<p>
-E desde então, tudo ficou mais bonito.
-</p>
-</div>
-</section>
-
-<section>
-<h2>Nossas Memórias 📸</h2>
-<div class="fotos">
-
-<div class="foto">
-<img src="IMG_20261109_174503.jpg" alt="João Vitor">
-<p>João Vitor ❤️</p>
-</div>
-
-<div class="foto">
-<img src="IMG_20261109_174526.jpg" alt="Samuel">
-<p>Samuel ❤️</p>
-</div>
-
-</div>
-</section>
-
-<section>
-<h2>Uma mensagem para você 💕</h2>
-<div class="card">
-<p id="mensagem">
-Clique no coração para receber uma mensagem.
-</p>
-<button class="botao" onclick="surpresa()">
-❤️ Abrir cartinha
-</button>
-</div>
-</section>
-
-<section>
-<h2>Nossas Músicas 🎵</h2>
-<div class="card">
-<p>Uma música, uma lembrança e nós dois.</p>
-<p>Em breve, nossas músicas favoritas estarão aqui.</p>
-</div>
-</section>
-
+<section id="historia"><h2>Nossa História 💌</h2><div class="cartao"><p>Entre tantas pessoas no mundo, a vida colocou você na minha.</p><p>E desde então, tudo ficou mais bonito.</p></div></section>
+<section id="cartinha"><div class="cartao carta-destaque"><div class="icone-carta">💌</div><div><h2>Uma mensagem para você</h2><p id="mensagem">Se eu pudesse escolher de novo, escolheria você. 💕</p><button class="acessar" id="novaCarta">Abrir cartinha ♡</button></div></div></section>
+<section id="fotos"><h2>Nossas Memórias 📸</h2><div class="fotos">
+<div class="foto"><img src="IMG_20261109_174503.jpg" alt="Avatar de João Vitor"><p>João Vitor ♡</p></div>
+<div class="foto"><img src="IMG_20261109_174526.jpg" alt="Avatar de Samuel"><p>Samuel ♡</p></div>
+</div></section>
+<section id="musicas"><h2>Nossas Músicas 🎵</h2><div class="cartao"><p>Uma música, uma lembrança e nós dois.</p><p>Em breve, nossas músicas favoritas estarão aqui.</p></div></section>
 <footer>Feito com amor ❤️</footer>
-
+</main>
 <script>
-/* SENHA 0807 */
-const senhaCorreta="0807";
-let senhaDigitada="";
-let verificando=false;
-let liberado=false;
-
-const capa=document.getElementById("capa");
-const digitos=document.querySelectorAll(".digito");
-const erro=document.getElementById("erro");
-
-function atualizarVisor(){
-digitos.forEach((d,i)=>{
-d.textContent=senhaDigitada[i]||"";
-d.classList.toggle(
-"ativo",
-i<senhaDigitada.length
-);
+/* BUSCA A FOTO PELO NOME USADO NO UPLOAD */
+const imagemCapa=document.getElementById('fotoCapa');
+const prefixoFoto='341d8ff8d9903a1dcd0a6a15296c80eb';
+const opcoesFoto=[prefixoFoto+'.jpg',prefixoFoto+'.jpeg',prefixoFoto+'.png',prefixoFoto+'.webp','capa.jpg'];
+let tentativaFoto=0;
+imagemCapa.addEventListener('load',()=>{
+ imagemCapa.style.opacity='1';
+ document.getElementById('capaPendente').style.display='none';
 });
-}
-
+imagemCapa.addEventListener('error',async()=>{
+ tentativaFoto++;
+ if(tentativaFoto<opcoesFoto.length){imagemCapa.src=opcoesFoto[tentativaFoto];return;}
+ try{
+ const resposta=await fetch('https://api.github.com/repos/vitor290/Dois-bobos-/contents/');
+ if(!resposta.ok)throw Error('Não foi possível consultar o repositório');
+ const arquivos=await resposta.json();
+ const foto=arquivos.find(a=>a.type==='file'&&a.name.toLowerCase().startsWith(prefixoFoto.toLowerCase()));
+ if(foto){imagemCapa.onerror=null;imagemCapa.src=encodeURIComponent(foto.name);}
+ }catch(e){/* mantém o fundo de reserva caso a foto não esteja disponível */}
+});
+imagemCapa.src=opcoesFoto[0];
+/* SENHA */
+let senha='';let bloqueado=false;let liberado=false;
+const quadrinhos=[...document.querySelectorAll('.digito')];
+function atualizarDigitos(){quadrinhos.forEach((q,i)=>{q.textContent=senha[i]||'';});}
 function digitar(n){
-if(liberado||verificando)return;
-if(senhaDigitada.length>=4)return;
-
-senhaDigitada+=n;
-erro.textContent="";
-atualizarVisor();
-
-if(senhaDigitada.length===4){
-verificando=true;
-setTimeout(verificarSenha,300);
+ if(bloqueado||liberado||senha.length===4)return;
+ senha+=n;document.getElementById('erro').textContent='';atualizarDigitos();
+ if(senha.length===4){
+ bloqueado=true;
+ setTimeout(()=>{
+ if(senha==='0807'){
+ liberado=true;abrirSurpresa();
+ }else{
+ document.getElementById('erro').textContent='Senha incorreta';
+ setTimeout(()=>{senha='';bloqueado=false;atualizarDigitos();},700);
+ }
+ },250);
+ }
 }
-}
-
-function apagarDigito(){
-if(liberado||verificando)return;
-
-senhaDigitada=senhaDigitada.slice(0,-1);
-erro.textContent="";
-atualizarVisor();
-}
-
-function verificarSenha(){
-if(senhaDigitada===senhaCorreta){
-liberado=true;
-abrirSurpresa();
-}else{
-erro.textContent="Senha incorreta.";
-
-setTimeout(()=>{
-senhaDigitada="";
-verificando=false;
-atualizarVisor();
-},700);
-}
-}
-
-document.querySelectorAll("[data-n]").forEach(b=>{
-b.addEventListener("click",()=>{
-digitar(b.dataset.n);
-});
-});
-
-document.getElementById("apagar")
-.addEventListener("click",apagarDigito);
-
-document.addEventListener("keydown",e=>{
-if(/^[0-9]$/.test(e.key))digitar(e.key);
-if(e.key==="Backspace")apagarDigito();
-});
-
-/* ABRIR SURPRESA */
-function abrirSurpresa(){
-document.getElementById("intro").style.display="flex";
-capa.classList.add("sumir");
-
-setTimeout(()=>{
-capa.remove();
-iniciarChuva();
-},650);
-}
-
-/* CARTINHAS */
-const frases=[
-"Você é uma das minhas partes favoritas da vida. ❤️",
-"Se eu pudesse escolher de novo, escolheria você. 💕",
-"Que a gente tenha muitas histórias para contar. 💌",
-"Você deixa meus dias mais bonitos. ❤️"
-];
-
-function surpresa(){
-const n=Math.floor(Math.random()*frases.length);
-document.getElementById("mensagem").textContent=frases[n];
-}
-
+function apagar(){if(bloqueado||liberado)return;senha=senha.slice(0,-1);atualizarDigitos();}
+document.querySelectorAll('[data-n]').forEach(b=>b.addEventListener('click',()=>digitar(b.dataset.n)));
+document.getElementById('apagar').addEventListener('click',apagar);
+document.addEventListener('keydown',e=>{if(/^[0-9]$/.test(e.key))digitar(e.key);else if(e.key==='Backspace')apagar();});
+/* CARTINHA */
+const frases=['Você é uma das minhas partes favoritas da vida. ❤️','Se eu pudesse escolher de novo, escolheria você. 💕','Que a gente tenha muitas histórias para contar. 💌','Você deixa meus dias mais bonitos. ❤️'];
+document.getElementById('novaCarta').addEventListener('click',()=>{const n=Math.floor(Math.random()*frases.length);document.getElementById('mensagem').textContent=frases[n];});
 /* CHUVA DE CORAÇÕES */
-const canvas=document.getElementById("chuva");
-const ctx=canvas.getContext("2d");
-const intro=document.getElementById("intro");
-const numero=document.getElementById("numero");
-
-let largura=0;
-let altura=0;
-let colunas=[];
-let ativo=false;
-let terminou=false;
-let ultimo=0;
-let inicio=0;
+const intro=document.getElementById('intro');const canvas=document.getElementById('chuva');const ctx=canvas.getContext('2d');const numero=document.getElementById('numero');
+let largura=0,altura=0,colunas=[],ativo=false,terminou=false,ultimo=0,inicio=0;
 const tarefas=[];
-
-const espacoFrente=9;
-const espacoFundo=18;
-
 function ajustar(){
-const d=Math.min(devicePixelRatio||1,1.5);
-
-largura=innerWidth;
-altura=innerHeight;
-
-canvas.width=largura*d;
-canvas.height=altura*d;
-ctx.setTransform(d,0,0,d,0,0);
-
-colunas=[];
-
-/* CORAÇÕES PEQUENOS AO FUNDO */
-for(let x=0;x<largura;x+=espacoFundo){
-colunas.push({
-x:x+Math.random()*5,
-y:Math.random()*altura*.65-altura*.4,
-vel:25+Math.random()*18,
-n:12+Math.floor(Math.random()*18),
-passo:10,
-tamanho:8,
-alpha:.3,
-fundo:true,
-ativar:Math.random(),
-fase:Math.random()*10
-});
+ const d=Math.min(devicePixelRatio||1,1.5);largura=innerWidth;altura=innerHeight;
+ canvas.width=Math.round(largura*d);canvas.height=Math.round(altura*d);ctx.setTransform(d,0,0,d,0,0);colunas=[];
+ for(let x=0;x<largura;x+=18)colunas.push({x:x+Math.random()*5,y:Math.random()*altura*.65-altura*.4,vel:25+Math.random()*18,n:12+Math.floor(Math.random()*18),passo:10,tamanho:8,alpha:.3,fundo:true,ativar:Math.random(),fase:Math.random()*10});
+ for(let x=0;x<largura;x+=9)colunas.push({x:x+Math.random()*3,y:Math.random()*altura*.75-altura*.35,vel:40+Math.random()*24,n:14+Math.floor(Math.random()*21),passo:10,tamanho:10,alpha:.85,fundo:false,ativar:Math.random(),fase:Math.random()*10});
 }
-
-/* CORAÇÕES PRINCIPAIS */
-for(let x=0;x<largura;x+=espacoFrente){
-colunas.push({
-x:x+Math.random()*3,
-y:Math.random()*altura*.75-altura*.35,
-vel:40+Math.random()*24,
-n:14+Math.floor(Math.random()*21),
-passo:10,
-tamanho:10,
-alpha:.85,
-fundo:false,
-ativar:Math.random(),
-fase:Math.random()*10
-});
-}
-}
-
 function desenhar(tempo){
-if(!ativo)return;
-
-requestAnimationFrame(desenhar);
-
-if(tempo-ultimo<33)return;
-
-const dt=Math.min((tempo-ultimo)/1000,.06);
-ultimo=tempo;
-
-const segundos=(tempo-inicio)/1000;
-
-ctx.fillStyle="#050006";
-ctx.fillRect(0,0,largura,altura);
-
-const intensidade=Math.min(
-1,.28+segundos*.48
-);
-
-ctx.textAlign="center";
-ctx.textBaseline="middle";
-
-for(const c of colunas){
-if(c.ativar>intensidade)continue;
-
-c.y+=c.vel*dt;
-
-if(c.y-c.n*c.passo>altura){
-c.y=-Math.random()*altura*.3;
+ if(!ativo)return;requestAnimationFrame(desenhar);if(tempo-ultimo<33)return;
+ const dt=Math.min((tempo-ultimo)/1000,.06);ultimo=tempo;
+ const segundos=(tempo-inicio)/1000;
+ ctx.fillStyle='#050006';ctx.fillRect(0,0,largura,altura);
+ const intensidade=Math.min(1,.28+segundos*.48);
+ ctx.textAlign='center';ctx.textBaseline='middle';
+ for(const c of colunas){
+ if(c.ativar>intensidade)continue;
+ c.y+=c.vel*dt;
+ if(c.y-c.n*c.passo>altura)c.y=-Math.random()*altura*.3;
+ ctx.font=c.tamanho+'px Arial';
+ for(let i=0;i<c.n;i++){
+ const y=c.y-i*c.passo;if(y<0||y>altura)continue;
+ const brilho=Math.pow(1-i/c.n,1.25);
+ const pulso=.85+.15*Math.sin(tempo*.002+c.fase+i*.2);
+ ctx.globalAlpha=c.alpha*brilho*pulso;
+ ctx.fillStyle=c.fundo?'#a83b78':i<2?'#ffacd5':i<7?'#ff5ea4':i<15?'#ec2775':'#9d124f';
+ ctx.fillText('♥',c.x,y);
+ }
+ }
+ ctx.globalAlpha=1;
 }
-
-ctx.font=c.tamanho+"px Arial";
-
-for(let i=0;i<c.n;i++){
-const y=c.y-i*c.passo;
-
-if(y<0||y>altura)continue;
-
-const brilho=Math.pow(
-1-i/c.n,1.25
-);
-
-const pulso=.85+
-.15*Math.sin(
-tempo*.002+c.fase+i*.2
-);
-
-ctx.globalAlpha=c.alpha*brilho*pulso;
-
-if(c.fundo){
-ctx.fillStyle="#a83b78";
-}else if(i<2){
-ctx.fillStyle="#ffacd5";
-}else if(i<7){
-ctx.fillStyle="#ff5ea4";
-}else if(i<15){
-ctx.fillStyle="#ec2775";
-}else{
-ctx.fillStyle="#9d124f";
-}
-
-ctx.fillText("♥",c.x,y);
-}
-}
-
-ctx.globalAlpha=1;
-}
-
-/* CONTAGEM 3, 2, 1 */
-function mostrarNumero(valor){
-if(terminou)return;
-
-numero.textContent=valor;
-numero.classList.remove("mostrar");
-void numero.offsetWidth;
-numero.classList.add("mostrar");
-}
-
-/* FINALIZAR INTRO */
+function mostrarNumero(v){if(terminou)return;numero.textContent=v;numero.classList.remove('mostrar');void numero.offsetWidth;numero.classList.add('mostrar');}
 function finalizarIntro(){
-if(terminou)return;
-
-terminou=true;
-ativo=false;
-
-tarefas.forEach(clearTimeout);
-intro.classList.add("sumir");
-document.body.classList.remove("travado");
-
-setTimeout(()=>{
-intro.remove();
-},950);
+ if(terminou)return;terminou=true;ativo=false;tarefas.forEach(clearTimeout);
+ intro.classList.add('sumir');document.body.classList.remove('travado');
+ setTimeout(()=>intro.remove(),950);
 }
-
-function agendar(fn,ms){
-tarefas.push(setTimeout(fn,ms));
-}
-
+document.getElementById('pular').addEventListener('click',finalizarIntro);
 function iniciarChuva(){
-inicio=performance.now();
-ultimo=inicio;
-ativo=true;
-
-ajustar();
-window.addEventListener("resize",ajustar);
-requestAnimationFrame(desenhar);
-
-agendar(()=>mostrarNumero("3"),2700);
-agendar(()=>mostrarNumero("2"),3900);
-agendar(()=>mostrarNumero("1"),5100);
-agendar(()=>mostrarNumero("♥"),6300);
-agendar(finalizarIntro,7700);
+ inicio=performance.now();ultimo=inicio;ativo=true;ajustar();window.addEventListener('resize',ajustar);requestAnimationFrame(desenhar);
+ tarefas.push(setTimeout(()=>mostrarNumero('3'),2700));
+ tarefas.push(setTimeout(()=>mostrarNumero('2'),3900));
+ tarefas.push(setTimeout(()=>mostrarNumero('1'),5100));
+ tarefas.push(setTimeout(()=>mostrarNumero('♥'),6300));
+ tarefas.push(setTimeout(finalizarIntro,7700));
+}
+function abrirSurpresa(){
+ intro.style.display='flex';const capa=document.getElementById('capaSenha');capa.classList.add('sumir');
+ setTimeout(()=>{capa.remove();iniciarChuva();},650);
 }
 </script>
-
 </body>
 </html>
