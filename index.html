@@ -21,7 +21,7 @@ font-family:inherit;
 cursor:pointer;
 }
 
-/* CAPA DA BILLIE EILISH */
+/* FUNDO DA BILLIE EILISH */
 #capa{
 position:fixed;
 inset:0;
@@ -37,7 +37,7 @@ rgba(0,0,0,.15)
 ),
 url("fcf3bf12b84d9f7d6393a8ce6f7948ad.jpg");
 background-size:cover;
-background-position:center center;
+background-position:center;
 background-repeat:no-repeat;
 overflow-y:auto;
 transition:opacity .6s ease;
@@ -47,46 +47,47 @@ opacity:0;
 pointer-events:none;
 }
 
-/* CAIXA BRANCA TRANSPARENTE */
+/* CAIXA TRANSPARENTE MAIS COMPACTA */
 .senha-box{
-width:min(82vw,286px);
-max-width:286px;
-padding:18px 12px 14px;
-background:rgba(255,255,255,.30);
+width:min(88vw,246px);
+max-width:246px;
+padding:13px 9px 10px;
+background:rgba(255,255,255,.25);
 backdrop-filter:blur(2px);
 -webkit-backdrop-filter:blur(2px);
 border:1.5px solid rgba(255,255,255,.75);
-border-radius:23px;
+border-radius:21px;
 box-shadow:0 12px 35px rgba(0,0,0,.20);
 color:#102c5b;
 }
 
+/* TÍTULO MENOR */
 .senha-box h1{
-font-size:25px;
+font-size:21px;
 color:#102c5b;
 font-weight:900;
-margin:0 0 13px;
+margin:0 0 10px;
 text-shadow:0 1px 3px #ffffff99;
 }
 
-/* QUATRO DÍGITOS */
+/* QUATRO DÍGITOS JUNTINHOS */
 .digitos{
 display:flex;
 justify-content:center;
-gap:6px;
-margin:0 0 3px;
+gap:5px;
+margin:0 0 2px;
 }
 
 .digito{
-width:42px;
-height:46px;
+width:39px;
+height:43px;
 background:rgba(255,255,255,.65);
 border:2px solid #173766;
-border-radius:11px;
+border-radius:9px;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:23px;
+font-size:22px;
 font-weight:bold;
 color:#102c5b;
 }
@@ -98,38 +99,38 @@ border-color:#0b2856;
 
 /* DICA MAIS PRÓXIMA */
 .dica{
-font-size:12px;
+font-size:11px;
 color:#102c5b;
 font-weight:600;
-margin:3px 0 10px;
+margin:2px 0 8px;
 text-shadow:0 1px 2px #ffffff99;
 }
 
-/* TECLADO COMPACTO */
+/* TECLADO MENOR */
 .teclado-area{
 width:100%;
-max-width:218px;
+max-width:214px;
 margin:0 auto;
-padding:8px;
+padding:7px;
 background:rgba(255,255,255,.65);
 border:2.5px solid #173766;
-border-radius:22px;
+border-radius:19px;
 }
 
 .teclado{
 display:grid;
 grid-template-columns:repeat(3,minmax(0,1fr));
-gap:7px;
+gap:6px;
 }
 
 .tecla{
 width:100%;
-height:44px;
+height:41px;
 background:#173766;
 color:#ffffff;
 border:1px solid #0c2850;
-border-radius:11px;
-font-size:20px;
+border-radius:9px;
+font-size:19px;
 font-weight:800;
 box-shadow:0 3px 0 #071b38;
 transition:transform .12s;
@@ -142,19 +143,17 @@ background:#254c85;
 }
 
 .tecla.del{
-font-size:13px;
+font-size:12px;
 }
 
-.tecla.vazia{
-visibility:hidden;
+#erro:empty{
+display:none;
 }
-
-#erro{
-min-height:16px;
+#erro:not(:empty){
 font-size:11px;
 font-weight:700;
 color:#981b32;
-margin-top:9px;
+margin-top:7px;
 }
 
 /* CHUVA DE CORAÇÕES */
@@ -169,7 +168,6 @@ justify-content:center;
 overflow:hidden;
 transition:opacity .9s ease;
 }
-
 #intro.sumir{
 opacity:0;
 pointer-events:none;
@@ -305,23 +303,24 @@ padding:35px;
 color:#ffb0c1;
 }
 
+/* TELAS PEQUENAS */
 @media(max-width:350px){
 .senha-box{
 width:88vw;
-padding:16px 9px 12px;
+padding:12px 7px 9px;
 }
 .senha-box h1{
-font-size:23px;
+font-size:20px;
 }
 .teclado-area{
 max-width:205px;
 }
 .tecla{
-height:42px;
+height:40px;
 }
 .digito{
-width:40px;
-height:44px;
+width:38px;
+height:42px;
 }
 }
 </style>
@@ -359,7 +358,7 @@ height:44px;
 <button class="tecla" data-n="8">8</button>
 <button class="tecla" data-n="9">9</button>
 
-<div class="tecla vazia"></div>
+<div></div>
 <button class="tecla" data-n="0">0</button>
 <button class="tecla del" id="apagar">DEL</button>
 
@@ -441,7 +440,7 @@ Clique no coração para receber uma mensagem.
 <footer>Feito com amor ❤️</footer>
 
 <script>
-/* SENHA */
+/* SENHA 0807 */
 const senhaCorreta="0807";
 let senhaDigitada="";
 let verificando=false;
@@ -582,7 +581,7 @@ fase:Math.random()*10
 });
 }
 
-/* CORAÇÕES NA FRENTE */
+/* CORAÇÕES PRINCIPAIS */
 for(let x=0;x<largura;x+=espacoFrente){
 colunas.push({
 x:x+Math.random()*3,
@@ -667,7 +666,7 @@ ctx.fillText("♥",c.x,y);
 ctx.globalAlpha=1;
 }
 
-/* CONTAGEM REGRESSIVA */
+/* CONTAGEM 3, 2, 1 */
 function mostrarNumero(valor){
 if(terminou)return;
 
