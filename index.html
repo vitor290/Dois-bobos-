@@ -1,1 +1,1353 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#29000e">
+<title>Dois Bobos ❤️</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#29000e;color:#fff;font-family:Arial,Helvetica,sans-serif}
+body.travado{overflow:hidden}
+button{font:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+#capaSenha{position:fixed;inset:0;z-index:1001;display:flex;align-items:center;justify-content:center;padding:12px;background:linear-gradient(#0002,#0003),url('fcf3bf12b84d9f7d6393a8ce6f7948ad.jpg') center/cover no-repeat;transition:opacity .55s}
+#capaSenha.sumir{opacity:0;pointer-events:none}
+.senha-box{width:min(88vw,246px);padding:13px 9px 10px;background:#ffffff50;backdrop-filter:blur(4px);border:1.5px solid #ffffffc0;border-radius:21px;color:#102c5b;text-align:center}
+.senha-box h1{font-size:21px;margin:0 0 10px}
+.digitos{display:flex;justify-content:center;gap:5px}
+.digito{width:39px;height:43px;background:#ffffffc0;border:2px solid #173766;border-radius:9px;display:grid;place-items:center;font-size:22px;font-weight:bold}
+.dica{font-size:11px;margin:3px 0 8px;font-weight:bold}
+.teclado-area{max-width:214px;margin:auto;padding:7px;background:#ffffffb5;border:2px solid #173766;border-radius:19px}
+.teclado{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tecla{height:41px;background:#173766;color:white;border:1px solid #0c2850;border-radius:9px;font-size:19px;font-weight:bold;box-shadow:0 3px 0 #071b38;touch-action:manipulation}
+.tecla:active{transform:translateY(2px);box-shadow:none}
+.tecla.del{font-size:12px}
+#erro{font-size:11px;color:#971b40;margin-top:7px}
+#erro:empty{display:none}
+#intro{display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;background:#050006;overflow:hidden;transition:opacity .8s}
+#intro.sumir{opacity:0;pointer-events:none}
+#chuva{position:absolute;inset:0;width:100%;height:100%}
+#numero{position:relative;z-index:2;opacity:0;font-size:clamp(95px,28vw,150px);font-weight:900;color:#ff91c1;text-shadow:0 0 14px #ff4c9d,0 0 35px #e81c7c}
+#numero.mostrar{animation:entrar .8s ease forwards}
+@keyframes entrar{
+0%{opacity:0;transform:scale(.5)}
+50%{opacity:1;transform:scale(1.15)}
+100%{opacity:1;transform:scale(1)}
+}
+#pular{position:absolute;bottom:28px;right:18px;z-index:3;background:#190019b0;color:#ffd0e4;border:1px solid #a84a76;border-radius:30px;padding:12px 17px}
+#site{min-height:100vh;background:linear-gradient(180deg,#4b0017,#29000e 60%,#190007)}
+.capa-site{width:100%;height:clamp(185px,52vw,340px);position:relative;overflow:hidden;background:linear-gradient(135deg,#602136,#d4829b)}
+.capa-site img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .5s}
+#capaPendente{position:absolute;inset:0;display:grid;place-items:center}
+.contagem{max-width:750px;margin:24px auto;padding:0 16px}
+.contagem-card{background:radial-gradient(circle at 50% 5%,#582347,#230a29 80%);border-radius:30px;padding:30px 17px;text-align:center;box-shadow:0 12px 30px #0005}
+.icone-rosa{font-size:35px;color:#ff78bd}
+.contagem-card h1{font-family:Georgia,serif;font-size:clamp(27px,8vw,45px);margin:16px 0}
+.desde{font-size:14px;color:#ffd0e5;margin-bottom:25px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.tempo{border:1px solid #b66b9690;border-radius:18px;padding:17px 3px;background:#ffffff0a}
+.valor{display:block;font-family:Georgia,serif;font-size:clamp(37px,11vw,60px);font-weight:bold}
+.legenda{display:block;font-size:11px;letter-spacing:2px;color:#ffd0e5;margin-top:8px}
+.menu{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:750px;margin:22px auto;padding:0 14px}
+.menu a{background:#edc4d0;color:#801d3c;border-radius:16px;padding:15px 3px;min-height:85px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;font-size:12px;text-align:center;font-weight:bold;touch-action:manipulation}
+.menu span{font-size:26px}
+.menu a.galaxy-shortcut{background:linear-gradient(145deg,#ffb1d8,#a78cf9);color:#3e0b47}
+section{padding:24px 17px;max-width:750px;margin:auto}
+h2{text-align:center;font-family:Georgia,serif;font-size:clamp(26px,7vw,38px);color:#ffe0e8;margin:10px 0 20px}
+.preto{background:#080808;color:white;border-radius:24px;padding:28px 19px;margin:18px 0;text-align:center}
+.preto p{line-height:1.8}
+.caligrafia{font-family:Georgia,serif;font-style:italic;font-size:23px}
+.dourado{color:#e8ce83}
+.desenho{font-size:90px}
+.sopa{border:2px solid #d6bc77;border-radius:12px;padding:14px 5px;margin-top:22px;font:clamp(12px,3vw,18px)/1.6 monospace;letter-spacing:1px;white-space:pre;overflow-x:auto}
+.motivos{margin:18px auto;max-width:350px;text-align:left;line-height:2;font-size:19px}
+.motivos li{padding-left:3px}
+.etiqueta{background:white;color:#9c1735;border-radius:15px;padding:17px;margin:22px auto 4px;max-width:290px;transform:rotate(-3deg);font-family:Georgia,serif;font-size:21px;box-shadow:6px 7px 0 #ab243a}
+.notificacao{display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap}
+.celular{height:215px;width:130px;border:4px solid #777;border-radius:25px;background:#161616;transform:rotate(-10deg);padding:35px 9px;flex-shrink:0}
+.hora{font-size:35px;font-weight:bold}
+.alerta{margin-top:28px;border:2px solid white;border-radius:30px;padding:9px 3px;font-size:14px}
+.notificacao p{max-width:240px;font-size:19px;font-weight:bold}
+.botao{border:0;background:#b52b55;color:white;border-radius:30px;padding:13px 22px;margin-top:12px}
+.mapa{width:100%;height:auto;display:block;max-width:540px;margin:0 auto;stroke:#ddc583;fill:none;stroke-width:2}
+.terra-frase{font-size:20px;line-height:1.9}
+.seta{font-size:35px;color:#ddc583}
+.livro{position:relative;margin:30px auto 0;width:min(65vw,230px);aspect-ratio:3/4;border:0;border-radius:12px 19px 15px 12px;background:linear-gradient(135deg,#d5f1ff,#a8dafa);box-shadow:10px 9px 0 #77b5d8,0 15px 30px #0007;cursor:pointer;touch-action:pan-y;display:block}
+.livro:before{content:'';position:absolute;top:0;bottom:0;left:13px;width:13px;background:#88c2e5;border-radius:8px}
+.livro:active{transform:rotate(-3deg)}
+.dica-livro{text-align:center;color:#ffd6e7;font-size:13px}
+footer{text-align:center;padding:40px;color:#ffc3db}
+#diarioModal{display:none;position:fixed;inset:0;z-index:2000;background:#080512f2;align-items:center;justify-content:center;padding:15px}
+#diarioModal.ativo{display:flex}
+.pagina-modal{width:min(100%,440px);text-align:center}
+.modal-barra{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.modal-barra button,.controle button{background:#382037;color:white;border:1px solid #8b5b83;border-radius:12px;padding:11px 16px}
+.foto-diario{background:#c7e8f8;border:8px solid #a8d9f2;border-radius:14px;min-height:300px;display:grid;place-items:center;padding:9px}
+.foto-diario img{width:100%;max-height:63vh;object-fit:contain;border-radius:6px}
+.controle{display:flex;justify-content:center;gap:15px;margin:14px}
+#posicao{color:#e4bfdb}
+#botaoMusica{display:none;position:fixed;right:15px;bottom:16px;z-index:600;padding:12px 15px;border-radius:30px;background:#681737;color:white;border:1px solid #ffa7cc}
+
+/* MINI GALÁXIA E TÚNEL */
+.galaxia-convite{text-align:center;background:radial-gradient(circle at center,#250a39,#08010e 74%);border:1px solid #bc6496;border-radius:28px;padding:22px 15px}
+.mini-galaxia{position:relative;display:block;width:156px;height:156px;margin:8px auto 15px;border:0;border-radius:50%;background:radial-gradient(circle at 50% 50%,#fff0b0 0 4%,#ff579c 6%,#56115c 16%,#100421 33%,#05000c 72%);box-shadow:0 0 28px #ef4c9e8a,0 0 65px #8d2dd63d;overflow:hidden;animation:miniPulse 4s ease-in-out infinite}
+.mini-galaxia:before{content:'';position:absolute;inset:22px 2px;border:3px dotted #ff93c5;border-radius:50%;transform:rotate(-25deg) scaleY(.45);box-shadow:0 0 18px #f76eaa;animation:miniGiro 8s linear infinite}
+.mini-galaxia:after{content:'💗';position:absolute;inset:0;display:grid;place-items:center;font-size:35px;text-shadow:0 0 14px #ff78c7}
+@keyframes miniGiro{
+to{transform:rotate(335deg) scaleY(.45)}
+}
+@keyframes miniPulse{
+50%{box-shadow:0 0 48px #ef4c9ebd,0 0 76px #8d2dd66e}
+}
+#tunel{display:none;position:fixed;inset:0;z-index:2990;background:#030009}
+#tunel.ativo{display:block}
+#tunel canvas{width:100%;height:100%;display:block}
+#tunel .tunelTexto{position:absolute;left:0;right:0;bottom:15%;text-align:center;font-family:Georgia,serif;color:#ffcae6;font-size:24px;text-shadow:0 0 20px #ff3b9e}
+
+/* GALÁXIA 3D */
+#galaxiaModal{display:none;position:fixed;inset:0;z-index:3000;background:#020007;overflow:hidden}
+#galaxiaModal.ativo{display:block}
+#galaxia3d{position:absolute;inset:0;touch-action:none;background:radial-gradient(circle at 50% 45%,#1b0728,#050009 70%)}
+#galaxia3d canvas{display:block;width:100%;height:100%}
+.galaxia-topo{position:absolute;left:10px;right:10px;top:max(10px,env(safe-area-inset-top));z-index:4;display:flex;justify-content:space-between;gap:8px;align-items:center;pointer-events:none}
+.galaxia-topo button{pointer-events:auto;background:#250b33d9;color:white;border:1px solid #ff88c3;border-radius:30px;padding:12px 15px;backdrop-filter:blur(8px)}
+.galaxia-topo strong{font:italic bold 20px Georgia,serif;color:#ffc1e1;text-shadow:0 0 9px #f35caa}
+#galaxiaAviso{position:absolute;top:80px;left:20px;right:20px;z-index:4;text-align:center;color:#ffd1e7;font-size:14px;pointer-events:none}
+.galaxia-instrucoes{position:absolute;bottom:max(20px,env(safe-area-inset-bottom));left:12px;right:12px;z-index:4;text-align:center;color:#f5c1da;font-size:12px;pointer-events:none;text-shadow:0 0 10px #000}
+#fotoGalaxiaModal{display:none;position:fixed;inset:0;z-index:4000;background:#000e;align-items:center;justify-content:center;padding:50px 16px}
+#fotoGalaxiaModal.ativo{display:flex}
+#fotoGalaxiaModal img{max-width:96%;max-height:82vh;object-fit:contain;border:5px solid #ff9bc8;border-radius:18px;box-shadow:0 0 35px #fa4d9c70}
+#fecharFotoGalaxia{position:absolute;top:20px;right:20px;border:1px solid #faa0d0;background:#390c32;color:#fff;border-radius:30px;padding:12px 16px}
+@media(max-width:370px){
+.menu a{font-size:11px}
+.menu span{font-size:23px}
+.galaxia-topo strong{font-size:16px}
+}
+</style>
+
+<script type="importmap">
+{
+"imports":{
+"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+"three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}
+}
+</script>
+</head>
+
+<body class="travado">
+
+<div id="capaSenha">
+<div class="senha-box">
+<h1>Digite a senha</h1>
+<div class="digitos">
+<div class="digito"></div>
+<div class="digito"></div>
+<div class="digito"></div>
+<div class="digito"></div>
+</div>
+<p class="dica">dica:0807</p>
+<div class="teclado-area">
+<div class="teclado">
+<button class="tecla" data-n="1">1</button>
+<button class="tecla" data-n="2">2</button>
+<button class="tecla" data-n="3">3</button>
+<button class="tecla" data-n="4">4</button>
+<button class="tecla" data-n="5">5</button>
+<button class="tecla" data-n="6">6</button>
+<button class="tecla" data-n="7">7</button>
+<button class="tecla" data-n="8">8</button>
+<button class="tecla" data-n="9">9</button>
+<div></div>
+<button class="tecla" data-n="0">0</button>
+<button class="tecla del" id="apagar">DEL</button>
+</div>
+</div>
+<div id="erro" aria-live="polite"></div>
+</div>
+</div>
+
+<div id="intro">
+<canvas id="chuva"></canvas>
+<div id="numero"></div>
+<button id="pular">Pular introdução</button>
+</div>
+
+<main id="site">
+<div class="capa-site">
+<img id="fotoCapa" alt="Foto dos ursinhos">
+<div id="capaPendente">Nossa foto de capa ♡</div>
+</div>
+
+<div class="contagem">
+<div class="contagem-card">
+<div class="icone-rosa">♥</div>
+<h1>João Vitor &amp; Samuel</h1>
+<p class="desde">♡ Juntos desde 21 de janeiro de 2025 ♡</p>
+<div class="trio">
+<div class="tempo">
+<span class="valor" id="anos">0</span>
+<span class="legenda">ANOS</span>
+</div>
+<div class="tempo">
+<span class="valor" id="meses">0</span>
+<span class="legenda">MESES</span>
+</div>
+<div class="tempo">
+<span class="valor" id="dias">0</span>
+<span class="legenda">DIAS</span>
+</div>
+</div>
+</div>
+</div>
+
+<nav class="menu">
+<a href="#mural"><span>✦</span>Mural</a>
+<a href="#terra"><span>🌍</span>Terra</a>
+<a href="#diario"><span>📖</span>Diário</a>
+<a href="#galaxia" class="galaxy-shortcut"><span>🌌</span>Galáxia</a>
+</nav>
+
+<section id="mural">
+<h2>Nosso Mural 🖤</h2>
+<div class="preto">
+<div class="desenho">♡</div>
+<p class="caligrafia">
+Você é tudo que eu sempre quis:
+companheiro da loucura, dos dias bons e ruins,
+companheiro para a vida...
+</p>
+<div class="sopa">A N O P S M R I R N O
+B C O M P A N H E I R O
+D A V E J A J U X V L
+F C A S K A R A W L H
+A T G D J F U P A R A
+V I D A I T E V R U D</div>
+</div>
+
+<div class="preto">
+<div class="desenho">❤️ 5</div>
+<h2 class="dourado">Motivos para eu te amar</h2>
+<ol class="motivos">
+<li>Você me faz rir.</li>
+<li>Você me acalma.</li>
+<li>Você me completa.</li>
+<li>Você me irrita do jeito certo.</li>
+<li>Você me ama como nunca.</li>
+</ol>
+<div class="etiqueta">
+Toda história de amor é linda, mas a nossa é minha favorita. ❤️
+</div>
+</div>
+
+<div class="preto">
+<div class="notificacao">
+<div class="celular">
+<div class="hora">14:00</div>
+<div class="alerta">🔔 Meu amor</div>
+</div>
+<p>Você continua sendo a minha notificação favorita!</p>
+</div>
+</div>
+
+<div class="preto">
+<h2>Uma cartinha para você 💌</h2>
+<p id="mensagem">
+Se eu pudesse escolher de novo, escolheria você. ❤️
+</p>
+<button class="botao" id="novaCarta">Abrir outra cartinha ♡</button>
+</div>
+</section>
+
+<section id="terra">
+<h2>O mundo e nós 🌍</h2>
+<div class="preto">
+<svg class="mapa" viewBox="0 0 800 360" aria-label="Mapa do mundo">
+<path d="M28 107L66 70 114 51 158 67 190 103 182 139 140 161 123 218 99 256 75 211 48 177Z"/>
+<path d="M198 218L240 190 285 206 302 255 278 304 252 345 217 296Z"/>
+<path d="M360 98L411 72 454 83 469 115 447 134 414 128Z"/>
+<path d="M427 149L477 156 507 207 485 270 453 301 429 247 408 189Z"/>
+<path d="M484 100L553 54 646 69 713 103 751 143 711 189 653 183 602 148 549 159 499 138Z"/>
+<path d="M656 256L710 243 749 268 760 303 720 327 673 306Z"/>
+</svg>
+<div class="seta">↘</div>
+<p class="terra-frase">
+O mundo é imenso, cheio de oceanos, mares e continentes.
+E, entre tantas pessoas, eu consegui encontrar
+o amor da minha vida. ❤️
+</p>
+</div>
+</section>
+
+<section id="diario">
+<h2>Nosso Diário 📘</h2>
+<button class="livro" id="abrirDiario" aria-label="Abrir nosso diário"></button>
+<p class="dica-livro">Toque ou arraste o diário para abrir as fotos.</p>
+</section>
+
+<section id="galaxia">
+<h2>Nosso Universo 🌌</h2>
+<div class="galaxia-convite">
+<button id="abrirGalaxia" class="mini-galaxia" aria-label="Entrar na galáxia"></button>
+<p>Toque na pequena galáxia para viajar por um túnel de estrelas até o nosso universo. 💞</p>
+<button class="botao" id="entrarUniverso">Entrar no nosso universo ✨</button>
+</div>
+</section>
+
+<footer>Feito com amor ❤️</footer>
+</main>
+
+<!-- DIÁRIO -->
+<div id="diarioModal">
+<div class="pagina-modal">
+<div class="modal-barra">
+<strong>Nosso Diário 📖</strong>
+<button id="fecharDiario">Fechar ✕</button>
+</div>
+<div class="foto-diario">
+<img id="fotoAtual" alt="Foto do nosso diário">
+</div>
+<div class="controle">
+<button id="anterior">❮ Anterior</button>
+<button id="seguinte">Próxima ❯</button>
+</div>
+<p id="posicao">1 / 10</p>
+</div>
+</div>
+
+<!-- MÚSICA -->
+<audio id="musicaSite" src="guto_lyrics_mp3.mp3" loop preload="auto"></audio>
+<button id="botaoMusica">▶ Música</button>
+
+<!-- TÚNEL -->
+<div id="tunel">
+<canvas id="tunelCanvas"></canvas>
+<div class="tunelTexto">Viajando até nosso universo... 💖</div>
+</div>
+
+<!-- GALÁXIA -->
+<div id="galaxiaModal" role="dialog" aria-label="Nossa galáxia 3D" aria-modal="true">
+<div id="galaxia3d"></div>
+<div class="galaxia-topo">
+<button id="voltarGalaxia">❮ Voltar</button>
+<strong>Nosso Universo 💗</strong>
+<button id="giroGalaxia">⏸ Giro</button>
+</div>
+<div id="galaxiaAviso">Carregando nosso universo...</div>
+<div class="galaxia-instrucoes">
+Arraste para girar 360° • Suba e desça • Use dois dedos para aproximar • Toque numa foto para ampliar
+</div>
+</div>
+
+<div id="fotoGalaxiaModal" role="dialog" aria-label="Foto ampliada">
+<button id="fecharFotoGalaxia">✕ Fechar</button>
+<img id="fotoGalaxiaGrande" alt="Nossa foto ampliada">
+</div>
+
+<script>
+"use strict";
+
+/* SENHA E MÚSICA */
+const $=id=>document.getElementById(id);
+const musica=$("musicaSite");
+const botaoMusica=$("botaoMusica");
+musica.volume=.45;
+
+function iniciarMusica(){
+botaoMusica.style.display="block";
+const p=musica.play();
+if(p&&p.then){
+p.then(()=>botaoMusica.textContent="♫ Pausar")
+.catch(()=>botaoMusica.textContent="▶ Música");
+}
+}
+
+botaoMusica.onclick=()=>{
+if(musica.paused)iniciarMusica();
+else{
+musica.pause();
+botaoMusica.textContent="▶ Música";
+}
+};
+
+let senha="";
+let bloqueado=false;
+let liberado=false;
+
+function mostrarSenha(){
+document.querySelectorAll(".digito").forEach((d,i)=>{
+d.textContent=senha[i]||"";
+});
+}
+
+function digitar(n){
+if(bloqueado||liberado||senha.length>=4)return;
+senha+=n;
+mostrarSenha();
+$("erro").textContent="";
+if(senha.length===4){
+bloqueado=true;
+if(senha==="0807")iniciarMusica();
+setTimeout(()=>{
+if(senha==="0807"){
+liberado=true;
+abrirIntro();
+}else{
+$("erro").textContent="Senha incorreta";
+setTimeout(()=>{
+senha="";
+bloqueado=false;
+mostrarSenha();
+},650);
+}
+},250);
+}
+}
+
+function apagar(){
+if(bloqueado||liberado)return;
+senha=senha.slice(0,-1);
+mostrarSenha();
+}
+
+document.querySelectorAll("[data-n]").forEach(b=>
+b.addEventListener("click",()=>digitar(b.dataset.n))
+);
+$("apagar").addEventListener("click",apagar);
+
+document.addEventListener("keydown",e=>{
+if(!$("capaSenha"))return;
+if(/^[0-9]$/.test(e.key))digitar(e.key);
+if(e.key==="Backspace")apagar();
+});
+
+/* CHUVA DE CORAÇÕES */
+const intro=$("intro");
+const canvas=$("chuva");
+const ctx=canvas.getContext("2d");
+let hearts=[];
+let chuvaRodando=false;
+let rafChuva=0;
+let temposIntro=[];
+
+function ajusteChuva(){
+const ratio=Math.min(devicePixelRatio||1,1.6);
+canvas.width=innerWidth*ratio;
+canvas.height=innerHeight*ratio;
+ctx.setTransform(ratio,0,0,ratio,0,0);
+hearts=Array.from({
+length:Math.min(240,Math.floor(innerWidth/2.5))
+},()=>({
+x:Math.random()*innerWidth,
+y:Math.random()*innerHeight,
+v:45+Math.random()*90,
+s:7+Math.random()*10,
+a:.15+Math.random()*.8
+}));
+}
+
+function chuvaFrame(){
+if(!chuvaRodando)return;
+ctx.fillStyle="#050006";
+ctx.fillRect(0,0,innerWidth,innerHeight);
+for(const h of hearts){
+h.y+=h.v/60;
+if(h.y>innerHeight+25)h.y=-25;
+ctx.fillStyle=`rgba(255,${Math.round(70+100*h.a)},${Math.round(140+70*h.a)},${h.a})`;
+ctx.font=`${h.s}px Arial`;
+ctx.fillText("♥",h.x,h.y);
+}
+rafChuva=requestAnimationFrame(chuvaFrame);
+}
+
+function contar(t){
+$("numero").textContent=t;
+$("numero").classList.remove("mostrar");
+void $("numero").offsetWidth;
+$("numero").classList.add("mostrar");
+}
+
+function terminarIntro(){
+chuvaRodando=false;
+cancelAnimationFrame(rafChuva);
+temposIntro.forEach(clearTimeout);
+intro.classList.add("sumir");
+document.body.classList.remove("travado");
+setTimeout(()=>{
+intro.style.display="none";
+},800);
+}
+
+function abrirIntro(){
+intro.style.display="flex";
+$("capaSenha").classList.add("sumir");
+setTimeout(()=>{
+$("capaSenha").style.display="none";
+ajusteChuva();
+chuvaRodando=true;
+chuvaFrame();
+temposIntro=[
+setTimeout(()=>contar("3"),1200),
+setTimeout(()=>contar("2"),2400),
+setTimeout(()=>contar("1"),3600),
+setTimeout(()=>contar("♥"),4800),
+setTimeout(terminarIntro,6200)
+];
+},450);
+}
+
+$("pular").onclick=terminarIntro;
+
+/* FOTO DOS URSINHOS */
+const capa=$("fotoCapa");
+const prefixo="341d8ff8d9903a1dcd0a6a15296c80eb";
+let tentativaCapa=0;
+const tentativasCapa=[
+prefixo+".jpg",
+prefixo+".jpeg",
+prefixo+".png",
+prefixo+".webp",
+"capa.jpg"
+];
+
+
+capa.onload=()=>{
+capa.style.opacity="1";
+$("capaPendente").style.display="none";
+};
+capa.onerror=()=>{
+tentativaCapa++;
+if(tentativaCapa<tentativasCapa.length){
+capa.src=tentativasCapa[tentativaCapa];
+}
+};
+capa.src=tentativasCapa[0];
+
+/* CONTADOR */
+const formato=new Intl.DateTimeFormat("en-US",{
+timeZone:"America/Sao_Paulo",
+year:"numeric",
+month:"2-digit",
+day:"2-digit"
+});
+
+function atualizarTempo(){
+const p=Object.fromEntries(
+formato.formatToParts(new Date())
+.filter(x=>x.type!=="literal")
+.map(x=>[x.type,Number(x.value)])
+);
+if(Date.UTC(p.year,p.month-1,p.day)<Date.UTC(2025,0,21))return;
+let a=p.year-2025;
+let m=p.month-1;
+let d=p.day-21;
+if(d<0){
+m--;
+d+=new Date(Date.UTC(p.year,p.month-1,0)).getUTCDate();
+}
+if(m<0){
+a--;
+m+=12;
+}
+$("anos").textContent=a;
+$("meses").textContent=m;
+$("dias").textContent=d;
+}
+atualizarTempo();
+setInterval(atualizarTempo,60000);
+
+/* CARTINHAS */
+const frases=[
+"Se eu pudesse escolher de novo, escolheria você. ❤️",
+"Você é uma das minhas partes favoritas da vida.",
+"Meu lugar favorito é onde você está. 💕",
+"A vida ficou mais bonita desde que você chegou.",
+"Eu escolheria viver mil histórias ao seu lado. ❤️"
+];
+$("novaCarta").onclick=()=>{
+$("mensagem").textContent=
+frases[Math.floor(Math.random()*frases.length)];
+};
+
+/* DIÁRIO */
+const fotos=[
+"IMG_20261109_222510.jpg",
+"IMG_20261109_222502.jpg",
+"IMG_20261109_222454.jpg",
+"IMG_20261109_222436.jpg",
+"IMG_20261109_222445.jpg",
+"IMG_20261109_222354.jpg",
+"IMG_20261109_222404.jpg",
+"IMG_20261109_222326.jpg",
+"IMG_20261109_222314.jpg",
+"IMG_20261109_222247.jpg"
+];
+window.fotosDoisBobos=fotos;
+
+let pagina=0;
+const diarioModal=$("diarioModal");
+const fotoAtual=$("fotoAtual");
+
+function atualizarPagina(){
+fotoAtual.src=fotos[pagina];
+$("posicao").textContent=(pagina+1)+" / "+fotos.length;
+}
+function abrirDiario(){
+pagina=0;
+atualizarPagina();
+diarioModal.classList.add("ativo");
+document.body.classList.add("travado");
+}
+function fecharDiario(){
+diarioModal.classList.remove("ativo");
+document.body.classList.remove("travado");
+}
+function virar(d){
+pagina=(pagina+d+fotos.length)%fotos.length;
+atualizarPagina();
+}
+$("abrirDiario").onclick=abrirDiario;
+$("fecharDiario").onclick=fecharDiario;
+$("anterior").onclick=()=>virar(-1);
+$("seguinte").onclick=()=>virar(1);
+
+diarioModal.onclick=e=>{
+if(e.target===diarioModal)fecharDiario();
+};
+
+let toqueX=0;
+let toqueY=0;
+
+fotoAtual.addEventListener("touchstart",e=>{
+toqueX=e.touches[0].clientX;
+},{passive:true});
+
+fotoAtual.addEventListener("touchend",e=>{
+let dx=e.changedTouches[0].clientX-toqueX;
+if(dx>45)virar(-1);
+if(dx< -45)virar(1);
+},{passive:true});
+
+$("abrirDiario").addEventListener("touchstart",e=>{
+toqueX=e.touches[0].clientX;
+toqueY=e.touches[0].clientY;
+},{passive:true});
+
+$("abrirDiario").addEventListener("touchend",e=>{
+const dx=e.changedTouches[0].clientX-toqueX;
+const dy=e.changedTouches[0].clientY-toqueY;
+if(Math.abs(dx)>35||Math.abs(dy)>35)abrirDiario();
+},{passive:true});
+
+/* TÚNEL DE PARTÍCULAS */
+const tunel=$("tunel");
+const tunelCanvas=$("tunelCanvas");
+const tc=tunelCanvas.getContext("2d");
+
+let tunelRaf=0;
+let tunelTimer=0;
+
+function entrarGalaxia(){
+tunel.classList.add("ativo");
+document.body.classList.add("travado");
+
+const escala=Math.min(devicePixelRatio||1,1.5);
+const w=innerWidth;
+const h=innerHeight;
+
+tunelCanvas.width=w*escala;
+tunelCanvas.height=h*escala;
+tc.setTransform(escala,0,0,escala,0,0);
+
+const pontos=Array.from({length:320},()=>({
+x:(Math.random()-.5)*2,
+y:(Math.random()-.5)*2,
+z:.12+Math.random()*1.5,
+c:["#ff71b9","#fff3ef","#ffd189","#db73ff"]
+[Math.floor(Math.random()*4)]
+}));
+
+let anterior=performance.now();
+
+function frame(t){
+const dt=Math.min((t-anterior)/1000,.05);
+anterior=t;
+tc.fillStyle="rgba(2,0,9,.32)";
+tc.fillRect(0,0,w,h);
+
+for(const p of pontos){
+p.z-=dt*1.1;
+if(p.z<.055){
+p.z=1.5;
+p.x=(Math.random()-.5)*2;
+p.y=(Math.random()-.5)*2;
+}
+const x=w/2+p.x*w*.37/p.z;
+const y=h/2+p.y*h*.37/p.z;
+const tamanho=Math.min(8,2.2/p.z);
+tc.fillStyle=p.c;
+tc.beginPath();
+tc.arc(x,y,tamanho,0,Math.PI*2);
+tc.fill();
+}
+tunelRaf=requestAnimationFrame(frame);
+}
+frame(anterior);
+
+clearTimeout(tunelTimer);
+tunelTimer=setTimeout(()=>{
+cancelAnimationFrame(tunelRaf);
+tunel.classList.remove("ativo");
+$("galaxiaModal").classList.add("ativo");
+
+if(typeof window.iniciarGalaxia3D==="function"){
+window.iniciarGalaxia3D();
+}else{
+$("galaxiaAviso").textContent=
+"Carregando a galáxia 3D... Confira sua conexão com a internet.";
+}
+},1750);
+}
+
+$("abrirGalaxia").onclick=entrarGalaxia;
+$("entrarUniverso").onclick=entrarGalaxia;
+
+$("voltarGalaxia").onclick=()=>{
+$("galaxiaModal").classList.remove("ativo");
+document.body.classList.remove("travado");
+if(window.pararGalaxia3D){
+window.pararGalaxia3D();
+}
+};
+
+$("fecharFotoGalaxia").onclick=()=>{
+$("fotoGalaxiaModal").classList.remove("ativo");
+};
+
+$("fotoGalaxiaModal").onclick=e=>{
+if(e.target===$("fotoGalaxiaModal")){
+$("fotoGalaxiaModal").classList.remove("ativo");
+}
+};
+
+document.addEventListener("keydown",e=>{
+if(e.key!=="Escape")return;
+if($("fotoGalaxiaModal").classList.contains("ativo")){
+$("fotoGalaxiaModal").classList.remove("ativo");
+}else if($("galaxiaModal").classList.contains("ativo")){
+$("voltarGalaxia").click();
+}else if(diarioModal.classList.contains("ativo")){
+fecharDiario();
+}
+});
+</script>
+
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+
+const area=document.getElementById("galaxia3d");
+const aviso=document.getElementById("galaxiaAviso");
+
+let cena,camera,renderer,controls,galaxia;
+let anel1,anel2,coracao,estrelasJato,imagemJato;
+let inicializado=false;
+let rodando=false;
+let auto=true;
+let ultimo=0;
+let raf=0;
+
+const orbitantes=[];
+const clicaveis=[];
+const cores=[
+"#ff478e",
+"#ffa3ce",
+"#fff2ee",
+"#ffc56b",
+"#db71ff"
+];
+
+/* TEXTURA DAS ESTRELAS */
+function texturaBrilho(){
+const c=document.createElement("canvas");
+c.width=c.height=64;
+const x=c.getContext("2d");
+const g=x.createRadialGradient(32,32,0,32,32,32);
+g.addColorStop(0,"rgba(255,255,255,1)");
+g.addColorStop(.23,"rgba(255,255,255,.9)");
+g.addColorStop(.6,"rgba(255,255,255,.15)");
+g.addColorStop(1,"rgba(255,255,255,0)");
+x.fillStyle=g;
+x.fillRect(0,0,64,64);
+return new THREE.CanvasTexture(c);
+}
+
+const brilho=texturaBrilho();
+
+function pontos(posicoes,cor,escala=1,opacidade=1){
+const g=new THREE.BufferGeometry();
+g.setAttribute(
+"position",
+new THREE.Float32BufferAttribute(posicoes,3)
+);
+const m=new THREE.PointsMaterial({
+color:cor,
+size:escala,
+map:brilho,
+transparent:true,
+opacity:opacidade,
+depthWrite:false,
+blending:THREE.AdditiveBlending,
+sizeAttenuation:true
+});
+return new THREE.Points(g,m);
+}
+
+/* TEXTO LUMINOSO */
+function spriteTexto(t){
+const c=document.createElement("canvas");
+c.width=1024;
+c.height=220;
+const x=c.getContext("2d");
+x.font="bold 68px Georgia";
+x.textAlign="center";
+x.textBaseline="middle";
+x.shadowBlur=22;
+x.shadowColor="#ff4c9a";
+x.fillStyle="#ffe4f3";
+x.fillText(t,512,110,980);
+
+const tex=new THREE.CanvasTexture(c);
+const sp=new THREE.Sprite(new THREE.SpriteMaterial({
+map:tex,
+transparent:true,
+depthWrite:false
+}));
+sp.scale.set(10,2.2,1);
+return sp;
+}
+
+/* FIGURINHAS E FOTOS CIRCULARES */
+function circuloImagem(fallback){
+const c=document.createElement("canvas");
+c.width=c.height=256;
+const x=c.getContext("2d");
+
+function fundo(){
+x.clearRect(0,0,256,256);
+x.fillStyle="#fff3f7";
+x.beginPath();
+x.arc(128,128,121,0,Math.PI*2);
+x.fill();
+x.lineWidth=10;
+x.strokeStyle="#ff5ba7";
+x.stroke();
+x.textAlign="center";
+x.textBaseline="middle";
+x.font="bold 75px Arial";
+x.fillStyle="#df397b";
+x.fillText(fallback,128,128,210);
+}
+fundo();
+
+const tex=new THREE.CanvasTexture(c);
+tex.colorSpace=THREE.SRGBColorSpace;
+
+const spr=new THREE.Sprite(new THREE.SpriteMaterial({
+map:tex,
+transparent:true,
+depthWrite:false
+}));
+
+return {spr,tex,c,x,fundo};
+}
+
+/* LOCALIZA IMAGENS DO REPOSITÓRIO */
+async function carregarImagens(){
+let arquivos=[];
+
+try{
+const r=await fetch(
+"https://api.github.com/repos/vitor290/Dois-bobos-/contents/",
+{cache:"force-cache"}
+);
+if(r.ok){
+arquivos=await r.json();
+if(!Array.isArray(arquivos))arquivos=[];
+}
+}catch(e){}
+
+const resolver=prefixo=>{
+const f=arquivos.find(a=>
+a.type==="file" &&
+a.name.toLowerCase().startsWith(prefixo.toLowerCase())
+);
+return f?encodeURIComponent(f.name):null;
+};
+
+for(const ob of orbitantes){
+if(!ob.imagem)continue;
+
+const src=ob.nomeCompleto||resolver(ob.prefixo);
+if(!src)continue;
+
+const img=new Image();
+
+img.onload=()=>{
+const t=ob.imagem;
+t.fundo();
+const x=t.x;
+x.save();
+x.beginPath();
+x.arc(128,128,112,0,Math.PI*2);
+x.clip();
+
+const rel=Math.max(
+224/img.width,
+224/img.height
+);
+const iw=img.width*rel;
+const ih=img.height*rel;
+
+x.drawImage(img,128-iw/2,128-ih/2,iw,ih);
+x.restore();
+
+x.lineWidth=9;
+x.strokeStyle="#ffd1e6";
+x.beginPath();
+x.arc(128,128,117,0,Math.PI*2);
+x.stroke();
+
+t.tex.needsUpdate=true;
+ob.url=src;
+};
+
+img.onerror=()=>{};
+img.src=src;
+}
+
+const capa=resolver("341d8ff8d9903a1dcd0a6a15296c80eb");
+
+if(capa){
+const foto=document.getElementById("fotoCapa");
+if(foto.style.opacity!=="1"){
+foto.src=capa;
+}
+}
+}
+
+/* ADICIONA OBJETO À ÓRBITA */
+function adicionaOrbitante(sprite,r,y,ang,vel){
+galaxia.add(sprite);
+const o={sprite,r,y,ang,vel};
+orbitantes.push(o);
+return o;
+}
+  
+/* CRIA A GALÁXIA */
+function iniciar(){
+if(inicializado){
+ajustar();
+return;
+}
+inicializado=true;
+
+try{
+cena=new THREE.Scene();
+cena.background=new THREE.Color(0x020007);
+
+camera=new THREE.PerspectiveCamera(58,1,.1,500);
+camera.position.set(0,17,43);
+
+renderer=new THREE.WebGLRenderer({
+antialias:true,
+alpha:false,
+powerPreference:"high-performance"
+});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.7));
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+area.appendChild(renderer.domElement);
+
+controls=new OrbitControls(camera,renderer.domElement);
+controls.target.set(0,5,0);
+controls.enableDamping=true;
+controls.dampingFactor=.055;
+controls.enablePan=false;
+controls.minDistance=10;
+controls.maxDistance=94;
+controls.minPolarAngle=.06;
+controls.maxPolarAngle=Math.PI-.06;
+controls.autoRotate=false;
+controls.enableZoom=true;
+controls.update();
+
+galaxia=new THREE.Group();
+cena.add(galaxia);
+
+/* ESTRELAS DISTANTES */
+let fundo=[];
+for(let i=0;i<1000;i++){
+fundo.push(
+(Math.random()-.5)*240,
+(Math.random()-.5)*180,
+(Math.random()-.5)*240
+);
+}
+cena.add(pontos(fundo,0xa9a0ed,.35,.65));
+
+/* BRAÇOS ESPIRAIS */
+const n=innerWidth<650?6700:11500;
+const pos=[];
+const cols=[];
+const paleta=cores.map(c=>new THREE.Color(c));
+
+for(let i=0;i<n;i++){
+const r=Math.sqrt(Math.random())*23;
+const bra=i%4;
+const ang=bra*Math.PI/2+r*.43+
+(Math.random()-.5)*(.27+r*.035);
+const espalha=(Math.random()-.5)*(.25+r*.03);
+
+pos.push(
+Math.cos(ang)*r+espalha,
+(Math.random()-.5)*(1+r*.075),
+Math.sin(ang)*r+espalha
+);
+
+const col=paleta[Math.floor(Math.random()*paleta.length)];
+cols.push(col.r,col.g,col.b);
+}
+
+const geo=new THREE.BufferGeometry();
+geo.setAttribute(
+"position",
+new THREE.Float32BufferAttribute(pos,3)
+);
+geo.setAttribute(
+"color",
+new THREE.Float32BufferAttribute(cols,3)
+);
+
+const mat=new THREE.PointsMaterial({
+map:brilho,
+size:.34,
+vertexColors:true,
+transparent:true,
+opacity:.93,
+depthWrite:false,
+blending:THREE.AdditiveBlending
+});
+
+galaxia.add(new THREE.Points(geo,mat));
+
+/* NÚCLEO */
+const esfera=new THREE.Mesh(
+new THREE.SphereGeometry(1.1,24,16),
+new THREE.MeshBasicMaterial({color:0x050008})
+);
+galaxia.add(esfera);
+
+/* ANÉIS ROSA E DOURADO */
+anel1=new THREE.Mesh(
+new THREE.TorusGeometry(2.4,.23,14,100),
+new THREE.MeshBasicMaterial({color:0xff4a9f})
+);
+anel1.rotation.x=Math.PI/2;
+galaxia.add(anel1);
+
+anel2=new THREE.Mesh(
+new THREE.TorusGeometry(3.35,.12,12,100),
+new THREE.MeshBasicMaterial({color:0xffc778})
+);
+anel2.rotation.x=Math.PI/2.12;
+galaxia.add(anel2);
+
+/* JATO DE ENERGIA ROSA */
+const jato=[];
+const total=700;
+
+for(let i=0;i<total;i++){
+const y=Math.random()*12;
+const r=(.25+y*.045)*Math.sqrt(Math.random());
+const a=Math.random()*Math.PI*2;
+jato.push(Math.cos(a)*r,y,Math.sin(a)*r);
+}
+
+estrelasJato=pontos(jato,0xff77be,.32,.95);
+galaxia.add(estrelasJato);
+imagemJato=estrelasJato.geometry.attributes.position;
+
+/* CORAÇÃO 3D */
+const hs=new THREE.Shape();
+hs.moveTo(0,-1.2);
+hs.bezierCurveTo(-1.3,-2,-3,-.6,-2.7,.9);
+hs.bezierCurveTo(-2.4,2.6,-.6,2.9,0,1.55);
+hs.bezierCurveTo(.6,2.9,2.4,2.6,2.7,.9);
+hs.bezierCurveTo(3,-.6,1.3,-2,0,-1.2);
+
+const hg=new THREE.ExtrudeGeometry(hs,{
+depth:.8,
+bevelEnabled:true,
+bevelSize:.24,
+bevelThickness:.3,
+bevelSegments:3,
+steps:1,
+curveSegments:18
+});
+hg.center();
+
+const hm=new THREE.MeshPhongMaterial({
+color:0xf6297c,
+emissive:0x941348,
+emissiveIntensity:.65,
+shininess:110,
+transparent:true,
+opacity:.67
+});
+
+coracao=new THREE.Mesh(hg,hm);
+coracao.position.y=15;
+coracao.scale.set(1.25,1.25,1.25);
+galaxia.add(coracao);
+
+/* CONTORNO DE PARTÍCULAS DO CORAÇÃO */
+const outline=[];
+
+for(let i=0;i<2500;i++){
+const t=Math.random()*Math.PI*2;
+const x=16*Math.pow(Math.sin(t),3)/8;
+const y=(
+13*Math.cos(t)
+-5*Math.cos(2*t)
+-2*Math.cos(3*t)
+-Math.cos(4*t)
+)/8;
+const z=(Math.random()-.5)*1.75;
+outline.push(x*1.25,15+y*1.25,z);
+}
+
+galaxia.add(pontos(outline,0xff8bce,.15,.8));
+
+const luz=new THREE.PointLight(0xff79af,20,60);
+luz.position.set(0,12,5);
+cena.add(luz);
+cena.add(new THREE.AmbientLight(0xffffff,.9));
+
+/* FRASES ROMÂNTICAS */
+const palavras=[
+"MEU CORAÇÃO É SEU",
+"INFINITO",
+"SEMPRE COM VOCÊ",
+"SEMPRE",
+"AMOR ETERNO",
+"TE AMO ❤️"
+];
+
+palavras.forEach((s,i)=>{
+adicionaOrbitante(
+spriteTexto(s),
+16+(i%3)*4,
+2+(i%4)*1.6,
+i*Math.PI*2/palavras.length,
+.0003+(i%3)*.00008
+);
+});
+
+/* FOTOS QUE PODEM SER AMPLIADAS */
+const nomes=window.fotosDoisBobos||[];
+
+nomes.slice(0,8).forEach((nome,i)=>{
+const t=circuloImagem("♡");
+t.spr.scale.set(4,4,1);
+
+const ob=adicionaOrbitante(
+t.spr,
+12+(i%4)*3,
+3+(i%3)*2,
+i*Math.PI*2/8+.3,
+.00025
+);
+
+ob.imagem=t;
+ob.nomeCompleto=nome;
+ob.url=nome;
+ob.foto=true;
+clicaveis.push(ob);
+});
+
+/* FIGURINHAS */
+const prefixos=[
+"e1f32c94e3fc9783e8de1823c05aaf9c",
+"45fd5c337e810577447f17bf519b853c",
+"3dbb7ad77643cc0e52b976e9ca22a429",
+"39f116a94ba229b7cb0b051122b0555f",
+"7aa5185d3427c715478bda2f7c6a04f8",
+"08b41dadc9e454a243ee43f8983512e1",
+"b030f5b9dc5d55c7e1597a7b4c436057",
+"d5d88b8da226e34c723be3568e682da",
+"f762b73e69fbd692f4a48402cf3fe2b8"
+];
+
+prefixos.forEach((pref,i)=>{
+const t=circuloImagem("♥");
+t.spr.scale.set(3.1,3.1,1);
+
+const ob=adicionaOrbitante(
+t.spr,
+17+(i%4)*2.2,
+1+(i%4)*2,
+i*Math.PI*2/prefixos.length+.6,
+.00032
+);
+
+ob.imagem=t;
+ob.prefixo=pref;
+});
+
+/* TOCAR PARA AMPLIAR FOTOS */
+const ray=new THREE.Raycaster();
+const mouse=new THREE.Vector2();
+let touchStart=null;
+
+renderer.domElement.addEventListener("pointerdown",e=>{
+touchStart={
+x:e.clientX,
+y:e.clientY
+};
+});
+
+renderer.domElement.addEventListener("pointerup",e=>{
+if(!touchStart)return;
+
+if(Math.hypot(
+e.clientX-touchStart.x,
+e.clientY-touchStart.y
+)>10)return;
+
+const rect=renderer.domElement.getBoundingClientRect();
+
+mouse.set(
+(e.clientX-rect.left)/rect.width*2-1,
+-(e.clientY-rect.top)/rect.height*2+1
+);
+
+ray.setFromCamera(mouse,camera);
+
+const achados=ray.intersectObjects(
+clicaveis.map(o=>o.sprite)
+);
+
+if(!achados.length)return;
+
+const ob=clicaveis.find(o=>
+o.sprite===achados[0].object
+);
+
+if(!ob||!ob.url)return;
+
+document.getElementById("fotoGalaxiaGrande").src=ob.url;
+document.getElementById("fotoGalaxiaModal").classList.add("ativo");
+});
+
+carregarImagens();
+aviso.textContent="";
+ajustar();
+
+}catch(e){
+console.error(e);
+aviso.textContent=
+"Não foi possível iniciar a galáxia 3D neste aparelho. Tente atualizar o Chrome.";
+}
+}
+
+/* AJUSTE DE TELA */
+function ajustar(){
+if(!renderer)return;
+
+const w=Math.max(area.clientWidth,1);
+const h=Math.max(area.clientHeight,1);
+
+camera.aspect=w/h;
+camera.updateProjectionMatrix();
+renderer.setSize(w,h,false);
+}
+
+/* ANIMAÇÃO CONTÍNUA */
+function animar(t){
+if(!rodando)return;
+
+raf=requestAnimationFrame(animar);
+const dt=Math.min(t-ultimo,50);
+ultimo=t;
+
+if(auto){
+galaxia.rotation.y+=dt*.00008;
+}
+
+anel1.rotation.z+=dt*.001;
+anel2.rotation.z-=dt*.0006;
+coracao.rotation.y+=dt*.0003;
+coracao.position.y=15+Math.sin(t*.0011)*.25;
+
+for(const o of orbitantes){
+o.ang+=o.vel*dt;
+o.sprite.position.set(
+Math.cos(o.ang)*o.r,
+o.y,
+Math.sin(o.ang)*o.r
+);
+}
+
+if(imagemJato){
+const a=imagemJato.array;
+
+for(let i=0;i<a.length/3;i++){
+a[i*3+1]+=.065*dt;
+if(a[i*3+1]>12){
+a[i*3+1]=0;
+}
+}
+imagemJato.needsUpdate=true;
+}
+
+controls.update();
+renderer.render(cena,camera);
+}
+
+/* INICIAR E PARAR */
+window.iniciarGalaxia3D=()=>{
+iniciar();
+if(!renderer)return;
+
+ajustar();
+
+if(!rodando){
+rodando=true;
+ultimo=performance.now();
+raf=requestAnimationFrame(animar);
+}
+};
+
+window.pararGalaxia3D=()=>{
+rodando=false;
+cancelAnimationFrame(raf);
+};
+
+/* BOTÃO DE GIRAR */
+document.getElementById("giroGalaxia").onclick=()=>{
+auto=!auto;
+document.getElementById("giroGalaxia").textContent=
+auto?"⏸ Giro":"▶ Giro";
+};
+
+window.addEventListener("resize",ajustar);
+
+if(document.getElementById("galaxiaModal").classList.contains("ativo")){
+window.iniciarGalaxia3D();
+}
+</script>
+</body>
+</html>
