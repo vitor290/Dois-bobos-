@@ -718,4 +718,24 @@ if(e.target===modal)fecharDiario();
 };
 let xInicial=0,yInicial=0;
 fotoAtual.addEventListener("touchstart",e=>{
-xInicial=
+
+xInicial=e.touches[0].clientX;
+},{passive:true});
+fotoAtual.addEventListener("touchend",e=>{
+const dx=e.changedTouches[0].clientX-xInicial;
+if(dx>45)virar(-1);
+if(dx< -45)virar(1);
+},{passive:true});
+livro.addEventListener("touchstart",e=>{
+xInicial=e.touches[0].clientX;
+yInicial=e.touches[0].clientY;
+},{passive:true});
+livro.addEventListener("touchend",e=>{
+const dx=e.changedTouches[0].clientX-xInicial;
+const dy=e.changedTouches[0].clientY-yInicial;
+if(Math.abs(dx)>35||Math.abs(dy)>35)abrirDiario();
+},{passive:true});
+</script>
+</body>
+</html>
+
