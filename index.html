@@ -10,15 +10,15 @@
 html{scroll-behavior:smooth}
 body{
 margin:0;
-background:#fff1f3;
-color:#641a32;
+background:#fff1f4;
+color:#6d1b36;
 font-family:Arial,sans-serif;
 text-align:center;
 }
 body.travado{overflow:hidden}
-button{font-family:inherit;cursor:pointer}
+button{font:inherit;cursor:pointer}
 
-/* SENHA */
+/* TELA DE SENHA */
 #capaSenha{
 position:fixed;
 inset:0;
@@ -27,16 +27,20 @@ display:flex;
 align-items:center;
 justify-content:center;
 padding:12px;
-background:linear-gradient(#0002,#0003),
+background:
+linear-gradient(#0002,#0003),
 url('fcf3bf12b84d9f7d6393a8ce6f7948ad.jpg')
 center/cover no-repeat;
 transition:opacity .6s;
 }
-#capaSenha.sumir{opacity:0;pointer-events:none}
+#capaSenha.sumir{
+opacity:0;
+pointer-events:none;
+}
 .senha-box{
 width:min(88vw,246px);
 padding:13px 9px 10px;
-background:#ffffff40;
+background:rgba(255,255,255,.25);
 backdrop-filter:blur(2px);
 -webkit-backdrop-filter:blur(2px);
 border:1.5px solid #ffffffc0;
@@ -82,7 +86,7 @@ background:#ffffffb5;
 }
 .teclado{
 display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
+grid-template-columns:repeat(3,1fr);
 gap:6px;
 }
 .tecla{
@@ -95,11 +99,11 @@ font-size:19px;
 font-weight:800;
 box-shadow:0 3px 0 #071b38;
 }
+.tecla.del{font-size:12px}
 .tecla:active{
 transform:translateY(2px);
 box-shadow:none;
 }
-.tecla.del{font-size:12px}
 #erro{
 font-size:11px;
 color:#8e1333;
@@ -108,7 +112,7 @@ margin-top:7px;
 }
 #erro:empty{display:none}
 
-/* ABERTURA COM CORAÇÕES */
+/* CHUVA DE CORAÇÕES */
 #intro{
 display:none;
 position:fixed;
@@ -120,7 +124,10 @@ justify-content:center;
 overflow:hidden;
 transition:opacity .9s;
 }
-#intro.sumir{opacity:0;pointer-events:none}
+#intro.sumir{
+opacity:0;
+pointer-events:none;
+}
 #chuva{
 position:absolute;
 inset:0;
@@ -134,15 +141,26 @@ opacity:0;
 font-size:clamp(95px,28vw,150px);
 font-weight:900;
 color:#ff91c1;
-text-shadow:0 0 14px #ff4c9d,0 0 32px #e81c7c;
+text-shadow:
+0 0 14px #ff4c9d,
+0 0 32px #e81c7c;
 }
 #numero.mostrar{
 animation:entradaNumero .8s ease forwards;
 }
 @keyframes entradaNumero{
-0%{opacity:0;transform:scale(.5)}
-50%{opacity:1;transform:scale(1.16)}
-100%{opacity:1;transform:scale(1)}
+0%{
+opacity:0;
+transform:scale(.5);
+}
+50%{
+opacity:1;
+transform:scale(1.16);
+}
+100%{
+opacity:1;
+transform:scale(1);
+}
 }
 #pular{
 position:absolute;
@@ -156,10 +174,14 @@ background:#190019b0;
 color:#ffd0e4;
 }
 
-/* PÁGINA PRINCIPAL */
+/* SITE PRINCIPAL */
 #site{
 background:linear-gradient(
-180deg,#ffe6eb 0%,#fff7f8 55%,#fff0f4 100%);
+180deg,
+#ffe7ed 0%,
+#fff8fa 65%,
+#fff0f5 100%
+);
 min-height:100vh;
 }
 
@@ -169,7 +191,9 @@ position:relative;
 width:100%;
 height:clamp(185px,52vw,340px);
 overflow:hidden;
-background:linear-gradient(135deg,#602136,#d4829b);
+background:linear-gradient(
+135deg,#602136,#d4829b
+);
 }
 .capa-site img{
 display:block;
@@ -186,52 +210,152 @@ inset:0;
 display:flex;
 align-items:center;
 justify-content:center;
-color:#fff;
+color:white;
 font-size:14px;
-padding:20px;
 }
 .capa-site::after{
 content:"";
 position:absolute;
 inset:auto 0 0;
-height:28px;
-background:linear-gradient(transparent,#fff0f4aa);
-pointer-events:none;
+height:25px;
+background:linear-gradient(
+transparent,#ffe7ed8c
+);
 }
 
-/* APRESENTAÇÃO */
-.apresentacao{padding:24px 16px 28px}
-.ornamento{
+/* CONTADOR DO RELACIONAMENTO */
+.contagens{
+padding:22px 14px 12px;
+max-width:760px;
+margin:auto;
+}
+.contagem-card{
+position:relative;
+overflow:hidden;
+padding:28px 17px 23px;
+border-radius:26px;
+background:radial-gradient(
+ellipse at 50% 5%,
+#59254d 0%,
+#2b102b 56%,
+#190b21 100%
+);
+color:#fff6fc;
+box-shadow:0 16px 35px #74244226;
+}
+.contagem-card::before{
+content:"♡";
+position:absolute;
+top:4px;
+right:18px;
+color:#ff90c3;
+font-size:55px;
+opacity:.14;
+}
+.marca{
 font-size:30px;
-color:#ab254d;
+color:#ff6fb8;
+filter:drop-shadow(0 0 9px #ff2d8b);
 }
-.apresentacao h1{
+.contagem-card h1{
 font-family:Georgia,serif;
-font-style:italic;
-color:#80152e;
-font-size:clamp(31px,9vw,48px);
-margin:7px 0;
+font-size:clamp(27px,8vw,38px);
+margin:9px 0 12px;
 }
-.apresentacao p{
-font-size:15px;
-line-height:1.7;
-margin:10px auto;
-max-width:370px;
-}
-.nomescasal{
-font-size:13px;
-color:#ae4565;
-font-weight:bold;
-letter-spacing:.3px;
+.desde{
+font-size:14px;
+color:#ffbedb;
+margin:0 0 17px;
+line-height:1.5;
 }
 
-/* BOTÕES DAS SEÇÕES */
+/* ANOS, MESES E DIAS */
+.trio{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+max-width:390px;
+margin:0 auto;
+}
+.tempo-bloco{
+padding:14px 3px 11px;
+border:1px solid #c86b9c90;
+border-radius:17px;
+background:#ffffff0e;
+}
+.tempo-numero{
+display:block;
+font-family:Georgia,serif;
+font-size:clamp(34px,10vw,52px);
+font-weight:bold;
+line-height:1.1;
+}
+.tempo-label{
+display:block;
+margin-top:6px;
+font-size:10px;
+letter-spacing:2px;
+color:#ffd0e7;
+}
+.divisor-contagem{
+width:72%;
+height:1px;
+background:#ffb6d74a;
+margin:22px auto 19px;
+}
+
+/* PRÓXIMO DIA 21 */
+.proximo-titulo{
+font-size:16px;
+font-weight:bold;
+color:#ffcbdf;
+margin:0 0 7px;
+}
+#mesAlvo{
+font-size:13px;
+color:#ffc6df;
+margin:0 0 13px;
+}
+.proxima-grade{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px;
+max-width:355px;
+margin:0 auto;
+}
+.proximo-bloco{
+border-radius:12px;
+background:#ffffff10;
+border:1px solid #e27daa5c;
+padding:11px 2px 9px;
+}
+.proximo-numero{
+display:block;
+font-size:clamp(23px,6vw,31px);
+font-weight:bold;
+font-variant-numeric:tabular-nums;
+}
+.proximo-label{
+display:block;
+font-size:9px;
+color:#ffcadf;
+margin-top:5px;
+}
+.celebracao{
+color:#ff9dc9;
+font-size:13px;
+min-height:18px;
+margin:12px 0 0;
+}
+
+/* MENU */
 .atalhos{
 display:grid;
-grid-template-columns:repeat(4,minmax(0,1fr));
+grid-template-columns:repeat(4,1fr);
 gap:8px;
 max-width:700px;
-margin:18px auto 0;
+margin:18px auto 6px;
+padding:0 15px;
 }
 .atalhos a{
 min-height:82px;
@@ -241,7 +365,7 @@ background:#f9d8df;
 color:#861e39;
 text-decoration:none;
 font-size:12px;
-font-weight:700;
+font-weight:bold;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -250,9 +374,9 @@ gap:6px;
 }
 .atalhos span{font-size:26px}
 
-/* SEÇÕES */
+/* RESTANTE DO SITE */
 section{
-padding:16px 18px 24px;
+padding:22px 18px;
 max-width:720px;
 margin:auto;
 }
@@ -297,8 +421,6 @@ background:#b82b57;
 color:white;
 font-size:15px;
 }
-
-/* FOTOS */
 .fotos{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -333,12 +455,14 @@ font-style:italic;
 .atalhos a{font-size:11px}
 .atalhos span{font-size:22px}
 .senha-box{width:246px;max-width:94vw}
+.contagem-card{padding:22px 12px}
+.trio{gap:6px}
 }
 </style>
 </head>
 <body class="travado">
 
-<!-- TELA DA SENHA -->
+<!-- SENHA -->
 <div id="capaSenha">
 <div class="senha-box">
 <h1>Digite a senha</h1>
@@ -365,37 +489,94 @@ font-style:italic;
 <button class="tecla del" id="apagar">DEL</button>
 </div>
 </div>
-<div id="erro" aria-live="polite"></div>
+<div id="erro"></div>
 </div>
 </div>
 
-<!-- CHUVA E CONTAGEM -->
+<!-- ANIMAÇÃO -->
 <div id="intro">
 <canvas id="chuva"></canvas>
 <div id="numero"></div>
 <button id="pular">Pular introdução</button>
 </div>
 
-<!-- SITE COM FOTO DE CAPA -->
+<!-- SITE -->
 <main id="site">
 
+<!-- FOTO DOS URSINHOS -->
 <div class="capa-site">
 <img id="fotoCapa" alt="Nossa foto de capa">
-<div id="capaPendente">Nossa foto de capa ♡</div>
+<div id="capaPendente">
+Nossa foto de capa ♡
+</div>
 </div>
 
-<div class="apresentacao">
-<div class="ornamento">♡</div>
-<h1>Nosso Cantinho ♥</h1>
-<div class="nomescasal">João Vitor &amp; Samuel</div>
-<p>
-Dois bobos, uma história só.<br>
-Um lugar para guardar nossas memórias. ♡
+<!-- CONTAGEM PRINCIPAL -->
+<div class="contagens">
+<div class="contagem-card">
+
+<div class="marca">♥</div>
+<h1>João Vitor &amp; Samuel</h1>
+
+<p class="desde">
+♡ Juntos desde 21 de janeiro de 2025 ♡
 </p>
 
+<div class="trio">
+<div class="tempo-bloco">
+<span class="tempo-numero" id="anosJuntos">0</span>
+<span class="tempo-label">ANOS</span>
+</div>
+<div class="tempo-bloco">
+<span class="tempo-numero" id="mesesJuntos">0</span>
+<span class="tempo-label">MESES</span>
+</div>
+<div class="tempo-bloco">
+<span class="tempo-numero" id="diasJuntos">0</span>
+<span class="tempo-label">DIAS</span>
+</div>
+</div>
+
+<div class="divisor-contagem"></div>
+
+<p class="proximo-titulo">
+Contagem para o nosso próximo dia 21 ❤️
+</p>
+
+<p id="mesAlvo"></p>
+
+<div class="proxima-grade">
+
+<div class="proximo-bloco">
+<span class="proximo-numero" id="faltamDias">00</span>
+<span class="proximo-label">DIAS</span>
+</div>
+
+<div class="proximo-bloco">
+<span class="proximo-numero" id="faltamHoras">00</span>
+<span class="proximo-label">HORAS</span>
+</div>
+
+<div class="proximo-bloco">
+<span class="proximo-numero" id="faltamMinutos">00</span>
+<span class="proximo-label">MIN</span>
+</div>
+
+<div class="proximo-bloco">
+<span class="proximo-numero" id="faltamSegundos">00</span>
+<span class="proximo-label">SEG</span>
+</div>
+
+</div>
+
+<p id="celebracao" class="celebracao"></p>
+</div>
+</div>
+
+<!-- BOTÕES -->
 <nav class="atalhos">
 <a href="#historia">
-<span>♡</span>Nossa<br>História
+<span>♡</span>Nossa História
 </a>
 <a href="#fotos">
 <span>▧</span>Fotos
@@ -407,7 +588,6 @@ Um lugar para guardar nossas memórias. ♡
 <span>♫</span>Músicas
 </a>
 </nav>
-</div>
 
 <section id="historia">
 <h2>Nossa História 💌</h2>
@@ -441,16 +621,19 @@ Abrir cartinha ♡
 <section id="fotos">
 <h2>Nossas Memórias 📸</h2>
 <div class="fotos">
+
 <div class="foto">
 <img src="IMG_20261109_174503.jpg"
-alt="Avatar de João Vitor">
+alt="João Vitor">
 <p>João Vitor ♡</p>
 </div>
+
 <div class="foto">
 <img src="IMG_20261109_174526.jpg"
-alt="Avatar de Samuel">
+alt="Samuel">
 <p>Samuel ♡</p>
 </div>
+
 </div>
 </section>
 
@@ -466,86 +649,222 @@ estarão aqui.
 </section>
 
 <footer>Feito com amor ❤️</footer>
+
 </main>
 
 <script>
 /* FOTO DE CAPA */
-const imagemCapa=document.getElementById('fotoCapa');
-const prefixoFoto='341d8ff8d9903a1dcd0a6a15296c80eb';
+const imagemCapa=document.getElementById("fotoCapa");
+const prefixoFoto="341d8ff8d9903a1dcd0a6a15296c80eb";
 const opcoesFoto=[
-prefixoFoto+'.jpg',
-prefixoFoto+'.jpeg',
-prefixoFoto+'.png',
-prefixoFoto+'.webp',
-'capa.jpg'
+prefixoFoto+".jpg",
+prefixoFoto+".jpeg",
+prefixoFoto+".png",
+prefixoFoto+".webp",
+"capa.jpg"
 ];
+
 let tentativaFoto=0;
 
-imagemCapa.addEventListener('load',()=>{
-imagemCapa.style.opacity='1';
-document.getElementById('capaPendente')
-.style.display='none';
+imagemCapa.addEventListener("load",()=>{
+imagemCapa.style.opacity="1";
+document.getElementById("capaPendente")
+.style.display="none";
 });
 
-imagemCapa.addEventListener('error',async()=>{
+imagemCapa.addEventListener("error",async()=>{
 tentativaFoto++;
+
 if(tentativaFoto<opcoesFoto.length){
 imagemCapa.src=opcoesFoto[tentativaFoto];
 return;
 }
+
 try{
 const resposta=await fetch(
-'https://api.github.com/repos/vitor290/Dois-bobos-/contents/'
+"https://api.github.com/repos/vitor290/Dois-bobos-/contents/"
 );
-if(!resposta.ok){
-throw Error('Não foi possível consultar o repositório');
-}
+
+if(!resposta.ok)throw Error("Falha ao consultar fotos");
+
 const arquivos=await resposta.json();
+
 const foto=arquivos.find(a=>
-a.type==='file'&&
+a.type==="file"&&
 a.name.toLowerCase().startsWith(
 prefixoFoto.toLowerCase()
 )
 );
+
 if(foto){
 imagemCapa.onerror=null;
 imagemCapa.src=encodeURIComponent(foto.name);
 }
 }catch(e){}
 });
+
 imagemCapa.src=opcoesFoto[0];
 
+/* CONTAGEM DO RELACIONAMENTO */
+const mesesNome=[
+"janeiro","fevereiro","março",
+"abril","maio","junho",
+"julho","agosto","setembro",
+"outubro","novembro","dezembro"
+];
+
+const formato=new Intl.DateTimeFormat("en-US",{
+timeZone:"America/Sao_Paulo",
+year:"numeric",
+month:"2-digit",
+day:"2-digit",
+hour:"2-digit",
+minute:"2-digit",
+second:"2-digit",
+hourCycle:"h23"
+});
+
+const preencher=n=>String(n).padStart(2,"0");
+
+function atualizarContagens(){
+
+const partes=Object.fromEntries(
+formato.formatToParts(new Date())
+.filter(p=>p.type!=="literal")
+.map(p=>[p.type,Number(p.value)])
+);
+
+const y=partes.year;
+const m=partes.month;
+const d=partes.day;
+
+/* TEMPO JUNTOS DESDE 21/01/2025 */
+let anos=y-2025;
+let meses=m-1;
+let dias=d-21;
+
+if(dias<0){
+meses--;
+dias+=new Date(
+Date.UTC(y,m-1,0)
+).getUTCDate();
+}
+
+if(meses<0){
+anos--;
+meses+=12;
+}
+
+document.getElementById("anosJuntos")
+.textContent=Math.max(0,anos);
+
+document.getElementById("mesesJuntos")
+.textContent=Math.max(0,meses);
+
+document.getElementById("diasJuntos")
+.textContent=Math.max(0,dias);
+
+/* PRÓXIMO DIA 21 */
+let alvoAno=y;
+let alvoMes=m;
+
+/* NO DIA 21, JÁ CONTA PARA O PRÓXIMO MÊS */
+if(d>=21){
+alvoMes++;
+
+if(alvoMes===13){
+alvoMes=1;
+alvoAno++;
+}
+}
+
+const agoraLocal=Date.UTC(
+y,m-1,d,
+partes.hour,
+partes.minute,
+partes.second
+);
+
+const alvoLocal=Date.UTC(
+alvoAno,alvoMes-1,21,0,0,0
+);
+
+let segundos=Math.max(
+0,
+Math.floor((alvoLocal-agoraLocal)/1000)
+);
+
+const restantesDias=Math.floor(segundos/86400);
+segundos%=86400;
+
+const restantesHoras=Math.floor(segundos/3600);
+segundos%=3600;
+
+const restantesMinutos=Math.floor(segundos/60);
+segundos%=60;
+
+document.getElementById("faltamDias")
+.textContent=preencher(restantesDias);
+
+document.getElementById("faltamHoras")
+.textContent=preencher(restantesHoras);
+
+document.getElementById("faltamMinutos")
+.textContent=preencher(restantesMinutos);
+
+document.getElementById("faltamSegundos")
+.textContent=preencher(segundos);
+
+document.getElementById("mesAlvo")
+.textContent=
+"21 de "+mesesNome[alvoMes-1]+" de "+alvoAno;
+
+document.getElementById("celebracao")
+.textContent=d===21
+?"Hoje é nosso dia! ❤️ A contagem já começou para o próximo mês."
+:"";
+}
+
+/* ATUALIZA A CADA SEGUNDO */
+atualizarContagens();
+setInterval(atualizarContagens,1000);
+
 /* SENHA */
-let senha='';
+let senha="";
 let bloqueado=false;
 let liberado=false;
+
 const quadrinhos=[
-...document.querySelectorAll('.digito')
+...document.querySelectorAll(".digito")
 ];
 
 function atualizarDigitos(){
 quadrinhos.forEach((q,i)=>{
-q.textContent=senha[i]||'';
+q.textContent=senha[i]||"";
 });
 }
 
 function digitar(n){
 if(bloqueado||liberado||senha.length===4)return;
+
 senha+=n;
-document.getElementById('erro').textContent='';
+
+document.getElementById("erro").textContent="";
 atualizarDigitos();
 
 if(senha.length===4){
 bloqueado=true;
+
 setTimeout(()=>{
-if(senha==='0807'){
+if(senha==="0807"){
 liberado=true;
 abrirSurpresa();
 }else{
-document.getElementById('erro')
-.textContent='Senha incorreta';
+document.getElementById("erro")
+.textContent="Senha incorreta";
+
 setTimeout(()=>{
-senha='';
+senha="";
 bloqueado=false;
 atualizarDigitos();
 },700);
@@ -560,39 +879,40 @@ senha=senha.slice(0,-1);
 atualizarDigitos();
 }
 
-document.querySelectorAll('[data-n]').forEach(b=>{
-b.addEventListener('click',()=>{
+document.querySelectorAll("[data-n]").forEach(b=>{
+b.addEventListener("click",()=>{
 digitar(b.dataset.n);
 });
 });
 
-document.getElementById('apagar')
-.addEventListener('click',apagar);
+document.getElementById("apagar")
+.addEventListener("click",apagar);
 
-document.addEventListener('keydown',e=>{
+document.addEventListener("keydown",e=>{
 if(/^[0-9]$/.test(e.key))digitar(e.key);
-else if(e.key==='Backspace')apagar();
+else if(e.key==="Backspace")apagar();
 });
 
 /* CARTINHA */
 const frases=[
-'Você é uma das minhas partes favoritas da vida. ❤️',
-'Se eu pudesse escolher de novo, escolheria você. 💕',
-'Que a gente tenha muitas histórias para contar. 💌',
-'Você deixa meus dias mais bonitos. ❤️'
+"Você é uma das minhas partes favoritas da vida. ❤️",
+"Se eu pudesse escolher de novo, escolheria você. 💕",
+"Que a gente tenha muitas histórias para contar. 💌",
+"Você deixa meus dias mais bonitos. ❤️"
 ];
-document.getElementById('novaCarta')
-.addEventListener('click',()=>{
+
+document.getElementById("novaCarta")
+.addEventListener("click",()=>{
 const n=Math.floor(Math.random()*frases.length);
-document.getElementById('mensagem')
+document.getElementById("mensagem")
 .textContent=frases[n];
 });
 
 /* CHUVA DE CORAÇÕES */
-const intro=document.getElementById('intro');
-const canvas=document.getElementById('chuva');
-const ctx=canvas.getContext('2d');
-const numero=document.getElementById('numero');
+const intro=document.getElementById("intro");
+const canvas=document.getElementById("chuva");
+const ctx=canvas.getContext("2d");
+const numero=document.getElementById("numero");
 
 let largura=0;
 let altura=0;
@@ -601,17 +921,22 @@ let ativo=false;
 let terminou=false;
 let ultimo=0;
 let inicio=0;
+
 const tarefas=[];
 
 function ajustar(){
 const d=Math.min(devicePixelRatio||1,1.5);
+
 largura=innerWidth;
 altura=innerHeight;
+
 canvas.width=Math.round(largura*d);
 canvas.height=Math.round(altura*d);
+
 ctx.setTransform(d,0,0,d,0,0);
 colunas=[];
 
+/* CORAÇÕES AO FUNDO */
 for(let x=0;x<largura;x+=18){
 colunas.push({
 x:x+Math.random()*5,
@@ -627,6 +952,7 @@ fase:Math.random()*10
 });
 }
 
+/* CORAÇÕES NA FRENTE */
 for(let x=0;x<largura;x+=9){
 colunas.push({
 x:x+Math.random()*3,
@@ -645,100 +971,135 @@ fase:Math.random()*10
 
 function desenhar(tempo){
 if(!ativo)return;
+
 requestAnimationFrame(desenhar);
+
 if(tempo-ultimo<33)return;
 
 const dt=Math.min((tempo-ultimo)/1000,.06);
 ultimo=tempo;
+
 const segundos=(tempo-inicio)/1000;
 
-ctx.fillStyle='#050006';
+ctx.fillStyle="#050006";
 ctx.fillRect(0,0,largura,altura);
 
-const intensidade=Math.min(1,.28+segundos*.48);
-ctx.textAlign='center';
-ctx.textBaseline='middle';
+const intensidade=Math.min(
+1,.28+segundos*.48
+);
+
+ctx.textAlign="center";
+ctx.textBaseline="middle";
 
 for(const c of colunas){
+
 if(c.ativar>intensidade)continue;
+
 c.y+=c.vel*dt;
 
 if(c.y-c.n*c.passo>altura){
 c.y=-Math.random()*altura*.3;
 }
-ctx.font=c.tamanho+'px Arial';
+
+ctx.font=c.tamanho+"px Arial";
 
 for(let i=0;i<c.n;i++){
+
 const y=c.y-i*c.passo;
+
 if(y<0||y>altura)continue;
 
 const brilho=Math.pow(1-i/c.n,1.25);
+
 const pulso=.85+
-.15*Math.sin(tempo*.002+c.fase+i*.2);
+.15*Math.sin(
+tempo*.002+c.fase+i*.2
+);
 
 ctx.globalAlpha=c.alpha*brilho*pulso;
-ctx.fillStyle=c.fundo?'#a83b78':
-i<2?'#ffacd5':
-i<7?'#ff5ea4':
-i<15?'#ec2775':'#9d124f';
 
-ctx.fillText('♥',c.x,y);
+ctx.fillStyle=c.fundo
+?"#a83b78"
+:i<2?"#ffacd5"
+:i<7?"#ff5ea4"
+:i<15?"#ec2775"
+:"#9d124f";
+
+ctx.fillText("♥",c.x,y);
 }
 }
+
 ctx.globalAlpha=1;
 }
 
-/* CONTAGEM */
+/* CONTAGEM 3, 2, 1 */
 function mostrarNumero(v){
 if(terminou)return;
+
 numero.textContent=v;
-numero.classList.remove('mostrar');
+numero.classList.remove("mostrar");
 void numero.offsetWidth;
-numero.classList.add('mostrar');
+numero.classList.add("mostrar");
 }
 
+/* ENTRAR NO SITE */
 function finalizarIntro(){
 if(terminou)return;
+
 terminou=true;
 ativo=false;
+
 tarefas.forEach(clearTimeout);
-intro.classList.add('sumir');
-document.body.classList.remove('travado');
-setTimeout(()=>intro.remove(),950);
+
+intro.classList.add("sumir");
+
+document.body.classList.remove("travado");
+
+setTimeout(()=>{
+intro.remove();
+},950);
 }
 
-document.getElementById('pular')
-.addEventListener('click',finalizarIntro);
+document.getElementById("pular")
+.addEventListener("click",finalizarIntro);
 
 function iniciarChuva(){
 inicio=performance.now();
 ultimo=inicio;
 ativo=true;
+
 ajustar();
-window.addEventListener('resize',ajustar);
+window.addEventListener("resize",ajustar);
+
 requestAnimationFrame(desenhar);
 
 tarefas.push(
-setTimeout(()=>mostrarNumero('3'),2700)
+setTimeout(()=>mostrarNumero("3"),2700)
 );
+
 tarefas.push(
-setTimeout(()=>mostrarNumero('2'),3900)
+setTimeout(()=>mostrarNumero("2"),3900)
 );
+
 tarefas.push(
-setTimeout(()=>mostrarNumero('1'),5100)
+setTimeout(()=>mostrarNumero("1"),5100)
 );
+
 tarefas.push(
-setTimeout(()=>mostrarNumero('♥'),6300)
+setTimeout(()=>mostrarNumero("♥"),6300)
 );
+
 tarefas.push(
 setTimeout(finalizarIntro,7700)
 );
 }
 
+/* DEPOIS DA SENHA */
 function abrirSurpresa(){
-intro.style.display='flex';
-const capa=document.getElementById('capaSenha');
-capa.classList.add('sumir');
+intro.style.display="flex";
+
+const capa=document.getElementById("capaSenha");
+capa.classList.add("sumir");
 
 setTimeout(()=>{
 capa.remove();
